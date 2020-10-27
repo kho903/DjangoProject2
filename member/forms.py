@@ -107,7 +107,7 @@ class UserCreateForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = "__all"
+        fields = ("username","email")
 
     def clean_password2(self):
         # Check that the two password entries match

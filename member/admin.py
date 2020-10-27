@@ -9,11 +9,27 @@ from django.utils.translation import ugettext_lazy as _
 
 from .models import User
 from .forms import UserCreateForm
-# admin창에서 보임
 
+
+# 템플릿 바꾸기
 class CustomUserAdmin(BaseUserAdmin):
     model = User
     add_form = UserCreateForm
+    fieldsets=(
+        BaseUserAdmin.fieldsets,
+        (
+            'User role',
+            {
+                'fields':(
+                    'is_director',
+                    'is_producer'
+                )
+
+            }
+        )
+    )
+
+# admin 창에서 보임
 admin.site.register(User)
 
 
