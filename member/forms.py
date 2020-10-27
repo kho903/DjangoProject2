@@ -3,7 +3,6 @@ from django.contrib.auth.models import User  # Django 내장모델인 'User'를 
 from django.contrib.auth.forms import UserCreationForm, \
     ReadOnlyPasswordHashField, UserChangeForm  # Django 내장 form인 UserCreationForm 을 import
 
-
 # Django의 내장 form인 UserCreationForm를 상속하여 UserCreateForm 클래스를 작성
 from django.core.exceptions import ValidationError
 
@@ -108,7 +107,7 @@ class UserCreateForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ("email", "username")
+        fields = "__all"
 
     def clean_password2(self):
         # Check that the two password entries match

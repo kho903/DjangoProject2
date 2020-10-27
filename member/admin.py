@@ -7,12 +7,15 @@ from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.models import Group
 from django.utils.translation import ugettext_lazy as _
 
-# from .forms import UserCreationForm, UserChangeForm
-from .forms import UserCreateForm,UserUpdateForm
 from .models import User
+from .forms import UserCreateForm
+# admin창에서 보임
 
-
+class CustomUserAdmin(BaseUserAdmin):
+    model = User
+    add_form = UserCreateForm
 admin.site.register(User)
+
 
 #
 # class UserAdmin(BaseUserAdmin):
