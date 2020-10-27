@@ -14,7 +14,7 @@ from django.utils.translation import ugettext_lazy as _
 class User(AbstractUser):
     birth_date=models.DateTimeField(null=True, blank=True)
     text = models.TextField(blank=True)
-    img = models.ImageField(upload_to='timeline_photo/%Y/%m/%d')
+    img = models.ImageField(upload_to='timeline_photo/%Y/%m/%d', null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
 

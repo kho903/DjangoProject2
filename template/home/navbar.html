@@ -55,13 +55,13 @@
 
         <ul class="navbar-nav ml-5 mr-5">
             <li class="nav-item dropdown mx-1 btn btn-primary">
-                {% if User.is_active %}
+                {% if user.is_active %}
                     <a href="#" class="nav-link dropdown-toggle text-white" data-toggle="dropdown">
                         <i class="fas fa-user"></i>&ensp;
-                        {% firstof User.get_short_name User.get_username %}&ensp;
+                        {% firstof User.get_short_name user.get_username %}&ensp;
                     </a>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="{% url 'logout' %}">Logout from [ {{User.nickname}} ]</a>
+                        <a class="dropdown-item" href="{% url 'logout' %}">Logout from [ {{user.username}} ]</a>
                         <a class="dropdown-item" href="{% url 'update' %}">My Page</a>
                     </div>
                 {% else %}

@@ -8,7 +8,7 @@
 	    <form method="post" action="{% url 'join' %}">
 		    {% csrf_token %}
 		    {{ form.as_p }}
-		    <div><button type="submit", class="btn btn-success", value="save">Submit Registration</button>
+		    <div><button type="submit" class="btn btn-success" value="save">Submit Registration</button>
             </div>
         </form>
 		<a href="{% url 'index' %}"><button type="button" class="btn btn-primary">Back to List</button></a>
