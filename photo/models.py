@@ -18,3 +18,16 @@ class Photo(models.Model):
 
     class Meta:
         ordering = ['-created']
+
+
+class Comment(models.Model):
+    photo = models.ForeignKey('Photo', on_delete=models.CASCADE, related_name='comments')
+    user = models.ForeignKey('member.User', on_delete=models.CASCADE)
+    created = models.DateTimeField(auto_now_add=True)
+    text = models.TextField()
+
+    def __str__(self):
+        return self.text
+
+    class Meta:
+        ordering = ['-created']

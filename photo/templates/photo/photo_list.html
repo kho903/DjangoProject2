@@ -1,31 +1,34 @@
 {% extends 'home/base.html' %}
 
 {% block content %}
-<div class="container">
-    <div class="row">
-        <div class="col-5">
-            {% for object in object_list %}
+    <div class="container">
+        <div class="row">
+            <div class="col-5">
+                {% for object in object_list %}
 
-            <div class="card">
-                <div class="card-header">
-                    <p class="card-text">{{ object.user }}</p>
-                </div>
-                <img src="{{ object.img.url }}" class="card-img-top" alt="...">
+                    <div class="card">
+                        <div class="card-header">
+                            <p class="card-text">{{ object.user }}</p>
+                        </div>
+                        <img src="{{ object.img.url }}" class="card-img-top" alt="...">
 
-                <div class="card-body">
-                    <p class="card-text">{{ object.text }}</p>
-                </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">올린 날짜 : {{ object.created }}</li>
-                </ul>
-                <ul>
-                    <a href="{% url 'photo:update' object.id %}" class="card-link">수정하기</a>
-                    <a href="{% url 'photo:delete' object.id %}" class="card-link">삭제하기</a>
-                </ul>
+                        <div class="card-body">
+                            <p class="card-text">{{ object.text }}</p>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">올린 날짜 : {{ object.created }}</li>
+                        </ul>
+                        <ul>
+                            <a href="{% url 'photo:update' object.id %}" class="card-link">수정하기</a>
+                            <a href="{% url 'photo:delete' object.id %}" class="card-link">삭제하기</a>
+                        </ul>
+
+                        {% for comment in photo.comments.all %}
+                            <p><span> {{ comment.user }} </span> : {{ comment.text }} </p>
+                        {% endfor %}
+                    </div>
+                {% endfor %}
             </div>
-
-            {% endfor %}
         </div>
     </div>
-</div>
 {% endblock %}
