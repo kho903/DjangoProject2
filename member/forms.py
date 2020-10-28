@@ -161,9 +161,9 @@ class UserCreationForm(forms.ModelForm): #UserCreationForm -> forms.ModelForm
 
     def save(self, commit=True):
         user = super(UserCreationForm, self).save(commit=False)
-        user.username = self.cleaned_data["username"]
-        user.email = self.cleaned_data["email"]
-        user.password = self.cleaned_data["password1"]
+        # user.username = self.cleaned_data["username"]
+        # user.email = self.cleaned_data["email"]
+        # user.password = self.cleaned_data["password1"]
         if commit:
             user.save()
         return user
@@ -181,15 +181,16 @@ class UserUpdateForm(UserChangeForm):
 
     password = ReadOnlyPasswordHashField()
 
-    # class Meta:
-    #     model = User
-    #     fields = ('username', 'email', 'password', 'birth_date', 'image','text')
+    class Meta:
+        model = User
+        fields = ('username', 'email', 'birth_date', 'img', 'text')
 
     widgets={
         'email' : forms.TextInput(),
-        'birth_date' : forms.DateTimeField(),
+        'birth_date' : forms.DateTimeField(required=False),
         'text' : forms.Textarea(attrs={'rows':3}),
-        'username' : forms.TextInput(attrs={'readonly':'readonly'})
+        'username' : forms.TextInput(attrs={'readonly':'readonly'}),
+        'image' : forms.FileInput()
     }
 
     def clean_password(self):
@@ -200,3 +201,10 @@ class UserUpdateForm(UserChangeForm):
 
     def _clean_fields(self):
         return
+
+    # Help 메시지가 표시되지 않도록 수정
+    def __init__(self, *args, **kwargs):
+        super(UserChangeForm, self).__init__(*args, **kwargs)
+
+        for fieldname in ['username']:
+            self.fields[fieldname].help_text = None
