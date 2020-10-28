@@ -1,23 +1,18 @@
-import json
-
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse
 from django.shortcuts import render
-# Create your views here.
-from .forms import UserCreationForm, UserUpdateForm
-# from django.contrib.auth.models import User
-from .models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm
+from .forms import UserCreationForm, UserUpdateForm
+from .models import User
 
-
+# Create your views here.
 # 마이 페이지에서 자기 정보를 수정하기
 @login_required
 def update(request):
     if request.method == 'POST':
         # 수정하는 로직 필요
-        user = request.user
-        form = UserUpdateForm(request.POST, instance=user)
+        # user = request.user
+        form = UserUpdateForm(request.POST.copy()) #, instance=user
         # postdata= request.POST.copy()
         # form = UserUpdateForm(postdata)
         if form.is_valid():

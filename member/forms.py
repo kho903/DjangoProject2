@@ -2,10 +2,8 @@ from django import forms
 from django.contrib.auth.models import User  # Django 내장모델인 'User'를 import
 from django.contrib.auth.forms import UserCreationForm, \
     ReadOnlyPasswordHashField, UserChangeForm  # Django 내장 form인 UserCreationForm 을 import
-
 # Django의 내장 form인 UserCreationForm를 상속하여 UserCreateForm 클래스를 작성
 from django.core.exceptions import ValidationError
-
 from django import forms
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from django.utils.translation import ugettext_lazy as _
@@ -179,17 +177,17 @@ class UserCreationForm(forms.ModelForm): #UserCreationForm -> forms.ModelForm
 # 업데이트 폼
 class UserUpdateForm(UserChangeForm):
 
-    password = ReadOnlyPasswordHashField()
+    # password = ReadOnlyPasswordHashField()
 
     class Meta:
         model = User
-        fields = ('username', 'email', 'birth_date', 'img', 'text')
+        fields = ('email', 'birth_date', 'img', 'text')
 
     widgets={
         'email' : forms.TextInput(),
         'birth_date' : forms.DateTimeField(required=False),
         'text' : forms.Textarea(attrs={'rows':3}),
-        'username' : forms.TextInput(attrs={'readonly':'readonly'}),
+        # 'username' : forms.TextInput(attrs={'readonly':'readonly'}),
         'image' : forms.FileInput()
     }
 
