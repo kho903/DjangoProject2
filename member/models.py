@@ -10,6 +10,7 @@ from django.utils.translation import ugettext_lazy as _
 # Create your models here.
 
 # 회원 DB
+# 생일, 텍스트, 이미지,
 
 class User(AbstractUser):
     birth_date=models.DateTimeField(null=True, blank=True)
@@ -17,8 +18,6 @@ class User(AbstractUser):
     img = models.ImageField(upload_to='timeline_photo/%Y/%m/%d', null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
-
-
 
 
 # class UserManager(BaseUserManager):

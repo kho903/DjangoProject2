@@ -8,13 +8,13 @@ from django.contrib.auth.models import Group
 from django.utils.translation import ugettext_lazy as _
 
 from .models import User
-from .forms import UserCreateForm
+from .forms import UserCreationForm
 
 
 # 템플릿 바꾸기
 class CustomUserAdmin(BaseUserAdmin):
     model = User
-    add_form = UserCreateForm
+    add_form = UserCreationForm
     fieldsets=(
         BaseUserAdmin.fieldsets,
         (

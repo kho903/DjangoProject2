@@ -102,12 +102,54 @@ from .models import User
 #
 
 # 회원가입 폼
-class UserCreateForm(UserCreationForm):
-    email = forms.EmailField(required=True)
+class UserCreationForm(forms.ModelForm): #UserCreationForm -> forms.ModelForm
+    #email = forms.EmailField(required=True)
+    username = forms.CharField(
+        label=_('username'),
+        required=True,
+        widget=forms.TextInput(
+            attrs={
+                'class': 'form-control',
+                'placeholder': _('username'),
+                'required': 'True',
+            }
+        )
+    )
+    email = forms.EmailField(
+            label=_('Email'),
+            required=True,
+            widget=forms.EmailInput(
+                attrs={
+                    'class': 'form-control',
+                    'placeholder': _('Email address'),
+                    'required': 'True',
+                }
+            )
+        )
+    password1 = forms.CharField(
+            label=_('Password'),
+            widget=forms.PasswordInput(
+                attrs={
+                    'class': 'form-control',
+                    'placeholder': _('Password'),
+                    'required': 'True',
+                }
+            )
+        )
+    password2 = forms.CharField(
+            label=_('Password confirmation'),
+            widget=forms.PasswordInput(
+                attrs={
+                    'class': 'form-control',
+                    'placeholder': _('Password confirmation'),
+                    'required': 'True',
+                }
+            )
+        )
 
     class Meta:
         model = User
-        fields = ("username","email")
+        fields = ("username","email","password1","password2")
 
     def clean_password2(self):
         # Check that the two password entries match
@@ -118,18 +160,20 @@ class UserCreateForm(UserCreationForm):
         return password2
 
     def save(self, commit=True):
-        user = super(UserCreateForm, self).save(commit=False)
+        user = super(UserCreationForm, self).save(commit=False)
+        user.username = self.cleaned_data["username"]
         user.email = self.cleaned_data["email"]
+        user.password = self.cleaned_data["password1"]
         if commit:
             user.save()
         return user
 
     # Help 메시지가 표시되지 않도록 수정
-    def __init__(self, *args, **kwargs):
-        super(UserCreateForm, self).__init__(*args, **kwargs)
-
-        for fieldname in ['username', 'password1', 'password2']:
-            self.fields[fieldname].help_text = None
+    # def __init__(self, *args, **kwargs):
+    #     super(UserCreationForm, self).__init__(*args, **kwargs)
+    #
+    #     for fieldname in ['username', 'password1', 'password2']:
+    #         self.fields[fieldname].help_text = None
 
 
 # 업데이트 폼

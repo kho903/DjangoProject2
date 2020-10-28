@@ -12,7 +12,6 @@ def update(request):
         # 수정하는 로직 필요
         postdata= request.POST.copy()
         form = UserUpdateForm(postdata)
-
         if form.is_valid():
             form.save()
         return render(request, 'home/base.html', {'message': "계정 정보가 수정되었습니다."})
@@ -20,17 +19,26 @@ def update(request):
         form = UserUpdateForm()
         return render(request, 'registration/update.html', {'form': form})
 
+# New User Registration
 def create_user(request):
     if request.method == 'POST':
         try:
-            nickname = request.POST['nickname']
+            username = request.POST['username']
             email = request.POST['email']
             password = request.POST['password1']
-            new_user = User.objects.create_user(nickname, email, password)
+            new_user = User.objects.create_user(username, email, password)
             new_user.save()
+            # form = UserCreationForm(request.POST, request.Files)
+            # if form.is_valid():
+            #     new_user = User.objects.create(**form.cleaned_data)
+            #     new_user.save()
             return render(request, 'registration/signup_done.html', {'message': '회원가입이 완료되었습니다.'})
+            # else:
+            #     form=UserCreationForm()
+            #     return render(request, 'registration/signup.html', {'form': form})
         except:
             return render(request, 'registration/signup_done.html', {'message': '회원이 이미 있음'})
+
     else:
         form = UserCreationForm()
         return render(request, 'registration/signup.html', {'form': form})
@@ -48,8 +56,9 @@ def sign_in(request):
                             password=request.POST.get('password', ''))
         if user is not None:
             login(request, user)
-            return render(request, 'registration/login.html', {'message': "로그인 되었습니다."})
-        return render(request, 'registration/login.html', {'message': "로그인에 실패하였습니다."})
+            return render(request, 'registration/signup_done.html', {'message': "로그인 되었습니다."})
+        else:
+            return render(request, 'registration/signup_done.html', {'message': "로그인에 실패하였습니다."})
     else:
         form = AuthenticationForm()
         return render(request, 'registration/login.html', {'form': form})
