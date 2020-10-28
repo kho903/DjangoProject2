@@ -14,5 +14,4 @@ urlpatterns = [
     path("search/", PhotoSearchView.as_view(), name='search'),
 ]
 
-urlpatterns += \
-    static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

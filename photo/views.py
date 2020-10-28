@@ -1,4 +1,5 @@
-from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect, get_object_or_404
 from django.db.models import Q
 from .forms import PostSearchForm
 
@@ -6,7 +7,7 @@ from .forms import PostSearchForm
 from django.views.generic.list import ListView
 from django.views.generic import CreateView, UpdateView, DeleteView, FormView
 
-from .models import Photo
+from .models import Photo, Comment
 
 
 class PhotoCreate(CreateView):
@@ -53,3 +54,22 @@ class PhotoSearchView(FormView):
         context['object_list'] = photo_list
 
         return render(self.request, self.template_name, context)
+
+
+@login_required
+def create_comment(request, pk):
+    photo = get_object_or_404(Photo, id=pk)
+    user = request.POST.get('user')
+    text = request.POST.get('text')
+    if text:
+        comment = Comment.objects.create(photo=photo, user=user, text=text)
+        comment.save()
+    # if request.method == 'POST':
+    #     comment = Comment()
+    #     comment.text = request.POST['text']
+    #     comment.photo = Photo.objects.get(pk=request.POST['Photo'])
+    #     comment.user = request.user.username
+    #     comment.save()
+    #     return redirect('/photo/' + str(comment.photo.id))
+    # else:
+    #     return redirect('home')
