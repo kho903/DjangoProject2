@@ -10,7 +10,7 @@
                         <div class="card-header">
                             <p class="card-text">{{ object.user }}</p>
                         </div>
-                        <img src="{{ object.img.url }}" class="card-img-top" alt="...">
+                        <img src="{{ object.img.url|slice:'1:' }}" class="card-img-top" alt="...">
 
                         <div class="card-body">
                             <p class="card-text">{{ object.text }}</p>
@@ -19,6 +19,7 @@
                             <li class="list-group-item">올린 날짜 : {{ object.created }}</li>
                         </ul>
                         <ul>
+                            <a href="{% url 'photo:detail' object.id %}" class="card-link">자세히 보기</a>
                             <a href="{% url 'photo:update' object.id %}" class="card-link">수정하기</a>
                             <a href="{% url 'photo:delete' object.id %}" class="card-link">삭제하기</a>
                         </ul>
@@ -31,4 +32,10 @@
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block extra-script %}
+    <script>
+
+    </script>
 {% endblock %}

@@ -9,7 +9,7 @@ from .forms import PostSearchForm
 
 # Create your views here.
 from django.views.generic.list import ListView
-from django.views.generic import CreateView, UpdateView, DeleteView, FormView
+from django.views.generic import CreateView, UpdateView, DeleteView, FormView, DetailView
 
 from .models import Photo, Comment
 
@@ -29,6 +29,7 @@ class PhotoCreate(CreateView):
 class PhotoList(ListView):
     model = Photo
     template_name_suffix = '_list'
+    paginate_by = 10
 
 
 class PhotoUpdate(UpdateView):
@@ -60,6 +61,11 @@ class PhotoSearchView(FormView):
         return render(self.request, self.template_name, context)
 
 
+class PhotoDetail(DetailView):
+    model = Photo
+    template_name_suffix = '_detail'
+
+
 @login_required
 def create_comment(request, pk):
     photo = get_object_or_404(Photo, id=pk)
@@ -69,12 +75,12 @@ def create_comment(request, pk):
         comment = Comment.objects.create(photo=photo, user=user, text=text)
         comment.save()
         comment_count = Comment.objects.filter(photo=pk).exclude(deleted=True).count()
-        photo.comments = comment_count
         photo.save()
         data = {
             'user': user,
             'photo': photo,
-            'text': text
+            'text': text,
+            'comment_id': comment.id
         }
         return HttpResponse(json.dumps(data, cls=DjangoJSONEncoder), content_type="application/json")
 
@@ -87,3 +93,21 @@ def create_comment(request, pk):
     #     return redirect('/photo/' + str(comment.photo.id))
     # else:
     #     return redirect('home')
+
+
+@login_required
+def delete_comment(request, pk):
+    photo = get_object_or_404(Photo, id=pk)
+    user = request.POST.get('user')
+    text = request.POST.get('text')
+    comment_id = request.POST.get('comment_id')
+    target_comment = Comment.objects.get(pk=comment_id)
+
+    if request.user == target_comment.user:
+        target_comment.deleted = True
+        target_comment.save()
+        photo.save()
+        data = {
+            'comment_id': comment_id
+        }
+        return HttpResponse(json.dumps(data, cls=DjangoJSONEncoder), content_type="application/json")
