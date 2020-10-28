@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.models import User  # Django 내장모델인 'User'를 import
+# from django.contrib.auth.models import User  # Django 내장모델인 'User'를 import
 from django.contrib.auth.forms import UserCreationForm, \
     ReadOnlyPasswordHashField, UserChangeForm  # Django 내장 form인 UserCreationForm 을 import
 # Django의 내장 form인 UserCreationForm를 상속하여 UserCreateForm 클래스를 작성
@@ -204,5 +204,5 @@ class UserUpdateForm(UserChangeForm):
     def __init__(self, *args, **kwargs):
         super(UserChangeForm, self).__init__(*args, **kwargs)
 
-        for fieldname in ['username']:
-            self.fields[fieldname].help_text = None
+        # for fieldname in ['username']:
+        #     self.fields[fieldname].help_text = None

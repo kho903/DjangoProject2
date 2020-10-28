@@ -1,4 +1,8 @@
+import json
+
 from django.contrib.auth.decorators import login_required
+from django.core.serializers.json import DjangoJSONEncoder
+from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.db.models import Q
 from .forms import PostSearchForm
@@ -64,6 +68,16 @@ def create_comment(request, pk):
     if text:
         comment = Comment.objects.create(photo=photo, user=user, text=text)
         comment.save()
+        comment_count = Comment.objects.filter(photo=pk).exclude(deleted=True).count()
+        photo.comments = comment_count
+        photo.save()
+        data = {
+            'user': user,
+            'photo': photo,
+            'text': text
+        }
+        return HttpResponse(json.dumps(data, cls=DjangoJSONEncoder), content_type="application/json")
+
     # if request.method == 'POST':
     #     comment = Comment()
     #     comment.text = request.POST['text']
