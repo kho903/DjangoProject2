@@ -8,10 +8,11 @@
 	    <form method="post" action="{% url 'update' %}">
 		    {% csrf_token %}
 		    {{ form.as_p }}
-		    <div><button type="submit", class="btn btn-success", value="save">Submit Update</button>
+		    <div><button type="submit", class="btn btn-success", value="save">Update</button>
             </div>
         </form>
-		<a href="{% url 'index' %}"><button type="button" class="btn btn-primary">Back to List</button></a>
+		<a href="{% url 'index' %}"><button type="button" class="btn btn-primary">Back</button></a>
+		<a href="{% url 'delete' %}"><button type="button" class="btn btn-danger">Delete</button></a>
 	</div>
 </div>
 {% endblock content %}

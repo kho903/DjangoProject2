@@ -1,23 +1,39 @@
+import json
+
+from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse
 from django.shortcuts import render
 # Create your views here.
 from .forms import UserCreationForm, UserUpdateForm
-from django.contrib.auth.models import User
+# from django.contrib.auth.models import User
+from .models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm
 
 
 # 마이 페이지에서 자기 정보를 수정하기
+@login_required
 def update(request):
     if request.method == 'POST':
         # 수정하는 로직 필요
-        postdata= request.POST.copy()
-        form = UserUpdateForm(postdata)
+        user = request.user
+        form = UserUpdateForm(request.POST, instance=user)
+        # postdata= request.POST.copy()
+        # form = UserUpdateForm(postdata)
         if form.is_valid():
             form.save()
         return render(request, 'home/base.html', {'message': "계정 정보가 수정되었습니다."})
     else:
         form = UserUpdateForm()
         return render(request, 'registration/update.html', {'form': form})
+
+@login_required
+def delete(request):
+    if request.method == "POST":
+        request.user.delete()
+        return render(request,'home/base.html')
+    return render(request, 'home/base.html')
+
 
 # New User Registration
 def create_user(request):
@@ -28,17 +44,9 @@ def create_user(request):
             password = request.POST['password1']
             new_user = User.objects.create_user(username, email, password)
             new_user.save()
-            # form = UserCreationForm(request.POST, request.Files)
-            # if form.is_valid():
-            #     new_user = User.objects.create(**form.cleaned_data)
-            #     new_user.save()
             return render(request, 'registration/signup_done.html', {'message': '회원가입이 완료되었습니다.'})
-            # else:
-            #     form=UserCreationForm()
-            #     return render(request, 'registration/signup.html', {'form': form})
         except:
             return render(request, 'registration/signup_done.html', {'message': '회원이 이미 있음'})
-
     else:
         form = UserCreationForm()
         return render(request, 'registration/signup.html', {'form': form})
