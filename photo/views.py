@@ -69,7 +69,7 @@ class PhotoDetail(DetailView):
 @login_required
 def create_comment(request, pk):
     photo = get_object_or_404(Photo, id=pk)
-    user = request.POST.get('user')
+    user = request.user
     text = request.POST.get('text')
     if text:
         comment = Comment.objects.create(photo=photo, user=user, text=text)
