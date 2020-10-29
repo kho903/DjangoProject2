@@ -74,12 +74,12 @@ def create_comment(request, pk):
     if text:
         comment = Comment.objects.create(photo=photo, user=user, text=text)
         comment.save()
-        comment_count = Comment.objects.filter(photo=pk).exclude(deleted=True).count()
         photo.save()
         data = {
             'user': user,
             'photo': photo,
             'text': text,
+            'created': '방금 전',
             'comment_id': comment.id
         }
         return HttpResponse(json.dumps(data, cls=DjangoJSONEncoder), content_type="application/json")
@@ -98,8 +98,6 @@ def create_comment(request, pk):
 @login_required
 def delete_comment(request, pk):
     photo = get_object_or_404(Photo, id=pk)
-    user = request.POST.get('user')
-    text = request.POST.get('text')
     comment_id = request.POST.get('comment_id')
     target_comment = Comment.objects.get(pk=comment_id)
 

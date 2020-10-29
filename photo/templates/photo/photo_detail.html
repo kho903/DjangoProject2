@@ -24,20 +24,28 @@
             </div>
             <div class="text-right" style="float:right">
                 <button id="create_comment" class="btn btn-sm">댓글달기</button>
+                <input type="hidden" id="create_comment_user" value={{ request.user }}>
             </div>
         </div>
+        <div id="comment_list"></div>
+
         {% for comment in photo.comments.all %}
             <p><span> {{ comment.user }} </span> : {{ comment.text }} </p>
         {% endfor %}
+
     </div>
 {% endblock %}
 
 {% block extra-script %}
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
     <script type="text/javascript">
         $(document).ready(function () {
             $('#create_comment').click(function () {
                 var text = $("#text").val();
-                var user = $("#create_comment").val();
+                var user = $("#create_comment_user").val();
                 $.ajax({
                     type: "POST",
                     url: "{% url 'photo:create_comment' photo.id %}",
@@ -48,11 +56,9 @@
                         'csrfmiddlewaretoken': '{{csrf_token}}',
                     },
                     success: function (response) {
-                        if (response.self_comment) {
-                            '<p><span> {{ comment.user }} </span> : {{ comment.text }} </p>\n'
-                        } else {
-                            '<p><span> {{ comment.user }} </span> : {{ comment.text }} </p>\n'
-                        }
+                        // 여기 고치면 댓글 될거 같음
+                        $("#comment_list").append("<p>"+response.text+"</p><br>")
+                        $("#text").val(' ')
                     },
                     error: function () {
                         if ($('#text').val() == "") {
