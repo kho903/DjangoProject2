@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.models import User  # Django 내장모델인 'User'를 import
+# from django.contrib.auth.models import User  # Django 내장모델인 'User'를 import
 from django.contrib.auth.forms import UserCreationForm, \
     ReadOnlyPasswordHashField, UserChangeForm  # Django 내장 form인 UserCreationForm 을 import
 # Django의 내장 form인 UserCreationForm를 상속하여 UserCreateForm 클래스를 작성
@@ -225,8 +225,16 @@ class UserUpdateForm(UserChangeForm):
         return
 
     # Help 메시지가 표시되지 않도록 수정
+<<<<<<< HEAD
     # def __init__(self, *args, **kwargs):
     #     super(UserChangeForm, self).__init__(*args, **kwargs)
     #
     #     for fieldname in ['username']:
     #         self.fields[fieldname].help_text = None
+=======
+    def __init__(self, *args, **kwargs):
+        super(UserChangeForm, self).__init__(*args, **kwargs)
+
+        # for fieldname in ['username']:
+        #     self.fields[fieldname].help_text = None
+>>>>>>> eb7f395a92448ac8dddd762c0c997093207cc88d
