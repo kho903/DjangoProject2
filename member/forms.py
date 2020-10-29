@@ -178,31 +178,55 @@ class UserCreationForm(forms.ModelForm): #UserCreationForm -> forms.ModelForm
 class UserUpdateForm(UserChangeForm):
 
     # password = ReadOnlyPasswordHashField()
+    email = forms.EmailField(
+        label=_('Email'),
+        required=True,
+        widget=forms.EmailInput(
+            attrs={
+                'class': 'form-control',
+                'placeholder': _('Change Email address'),
+                'required': 'False',
+            }
+        )
+    )
+    birth_date = forms.DateTimeField(
+        label=_('Birth_date'),
+        required= True,
+        widget=forms.DateTimeInput(
+            attrs={
+                'class': 'form-control',
+                'placeholder': _('Birth Date'),
+                'required': 'False',
+            }
+        )
+    )
+    image =forms.FileInput()
+    text = forms.Textarea()
 
     class Meta:
         model = User
-        fields = ('email', 'birth_date', 'img', 'text')
+        fields = ('email', 'birth_date','text','img')
 
-    widgets={
-        'email' : forms.TextInput(),
-        'birth_date' : forms.DateTimeField(required=False),
-        'text' : forms.Textarea(attrs={'rows':3}),
-        # 'username' : forms.TextInput(attrs={'readonly':'readonly'}),
-        'image' : forms.FileInput()
-    }
+    # widgets={
+    #     'email' : forms.EmailField(required=False),
+    #     'birth_date' : forms.DateTimeField(required=False),
+    #     'text' : forms.Textarea(attrs={'rows':3}),
+    #     # 'username' : forms.TextInput(attrs={'readonly':'readonly'}),
+    #     'image' : forms.FileInput()
+    # }
 
-    def clean_password(self):
-        # Regardless of what the user provides, return the initial value.
-        # This is done here, rather than on the field, because the
-        # field does not have access to the initial value
-        return self.initial["password"]
+    # def clean_password(self):
+    #     # Regardless of what the user provides, return the initial value.
+    #     # This is done here, rather than on the field, because the
+    #     # field does not have access to the initial value
+    #     return self.initial["password"]
 
     def _clean_fields(self):
         return
 
     # Help 메시지가 표시되지 않도록 수정
-    def __init__(self, *args, **kwargs):
-        super(UserChangeForm, self).__init__(*args, **kwargs)
-
-        for fieldname in ['username']:
-            self.fields[fieldname].help_text = None
+    # def __init__(self, *args, **kwargs):
+    #     super(UserChangeForm, self).__init__(*args, **kwargs)
+    #
+    #     for fieldname in ['username']:
+    #         self.fields[fieldname].help_text = None
