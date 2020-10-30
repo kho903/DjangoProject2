@@ -65,6 +65,7 @@ def sign_out(request):
     return render(request, 'home/base.html')
 
 
+
 def sign_in(request):
     if request.method == 'POST':
         user = authenticate(request, username=request.POST.get('username', ''),

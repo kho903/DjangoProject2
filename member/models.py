@@ -8,16 +8,12 @@ from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 
 # Create your models here.
-
 # 회원 DB
-# 생일, 텍스트, 이미지,
 
 class User(AbstractUser):
-    birth_date=models.DateField(null=True, blank=True) # DB 스키마 변경하기!!!
+    birth_date = models.DateField(null=True, blank=True) # DB 스키마 변경하기!!!
     text = models.TextField(blank=True)
-    img = models.ImageField(upload_to='timeline_photo/%Y/%m/%d', null=True, blank=True)
-    created = models.DateTimeField(auto_now_add=True)
-    updated_date = models.DateTimeField(auto_now=True)
+    img = models.ImageField(upload_to='user/%Y/%m/%d', null=True, blank=True)
 
 
 # class UserManager(BaseUserManager):

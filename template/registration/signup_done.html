@@ -1,4 +1,4 @@
-{% extends 'home/base.html' %}
+{% extends 'home/home.html' %}
 {% block content %}
 <div id="content-wrapper">
 	<div class="container-fluid">
@@ -6,9 +6,12 @@
 		    <h1>{{message}}</h1>
 	    </div>
         <div>
-		<a href="{% url 'login' %}"><button type="button" class="btn btn-primary">로그인 하기</button></a>
+		<a href="{% url 'logout' %}"><button type="button" class="btn btn-success">로그아웃</button></a>
         <a href="{% url 'index' %}"><button type="button" class="btn btn-primary">뒤로 가기</button></a>
         </div>
 	</div>
 </div>
+<script>
+	alert('{{message}}');
+</script>
 {% endblock content %}
