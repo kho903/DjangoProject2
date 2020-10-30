@@ -172,7 +172,6 @@ class UserCreationForm(forms.ModelForm): #UserCreationForm -> forms.ModelForm
 
 # 업데이트 폼
 class UserUpdateForm(forms.ModelForm): #UserChangeForm
-
     password = ReadOnlyPasswordHashField()
     # email = forms.EmailField(
     #     label=_('Email'),
@@ -214,4 +213,5 @@ class UserUpdateForm(forms.ModelForm): #UserChangeForm
     #     # This is done here, rather than on the field, because the
     #     # field does not have access to the initial value
     #     return self.initial["password"]
-
+    def clean_password(self):
+        return self.initial["password"]

@@ -10,5 +10,6 @@ urlpatterns = [
     url('logout/', views.sign_out, name='logout'),
     url('update/', views.update, name='update'),
     url('delete/',views.delete, name='delete'),
-    url('change_password/',views.change_password,name='change_password')
+    url('change_password/',views.change_password,name='change_password'),
+    url('profile/',views.profile, name='profile')
 ]

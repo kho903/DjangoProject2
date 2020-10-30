@@ -38,8 +38,8 @@ def change_password(request):
 def delete(request):
     if request.method == "POST":
         request.User.delete()
-        return render(request,'home/base.html')
-    return render(request, 'home/base.html')
+        return redirect('index')
+    return redirect('index')
 
 
 # New User Registration
@@ -78,3 +78,24 @@ def sign_in(request):
         form = AuthenticationForm()
         return render(request, 'registration/login.html', {'form': form})
 
+# 정보 수정하는 기능
+def profile(request):
+    if request.method == 'GET':
+        return render(request, 'registration/mypage.html')
+
+    elif request.method == 'POST':
+        user = request.user
+
+        text = request.POST.get('text')
+        email = request.POST.get('email')
+        name = request.POST.get('username')
+        img = request.POST.get('img')
+
+        user.text = text
+        user.email = email
+        user.name = name
+        user.img = img
+
+        user.save()
+
+        return redirect('member/profile', user.username)
