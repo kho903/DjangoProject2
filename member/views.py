@@ -88,12 +88,12 @@ def profile(request):
 
         text = request.POST.get('text')
         email = request.POST.get('email')
-        name = request.POST.get('username')
+        # birth_date = request.POST.get('birth_date')
         img = request.POST.get('img')
 
         user.text = text
         user.email = email
-        user.name = name
+        # user.birth_date = birth_date
         user.img = img
 
         user.save()

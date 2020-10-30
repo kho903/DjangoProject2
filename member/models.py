@@ -13,7 +13,7 @@ from django.utils.translation import ugettext_lazy as _
 # 생일, 텍스트, 이미지,
 
 class User(AbstractUser):
-    birth_date=models.DateTimeField(null=True, blank=True) # DB 스키마 변경하기!!!
+    birth_date=models.DateField(null=True, blank=True) # DB 스키마 변경하기!!!
     text = models.TextField(blank=True)
     img = models.ImageField(upload_to='timeline_photo/%Y/%m/%d', null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)
