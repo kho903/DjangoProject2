@@ -55,7 +55,7 @@
 
         <ul class="navbar-nav ml-5 mr-5">
             <li class="nav-item dropdown mx-1 btn btn-primary">
-                {% if user.is_active %}
+                {% if User.is_active %}
                     <a href="#" class="nav-link dropdown-toggle text-white" data-toggle="dropdown">
                         <i class="fas fa-user"></i>&ensp;
                         {% firstof User.get_short_name user.get_username %}&ensp;
