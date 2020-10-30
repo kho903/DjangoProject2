@@ -3,15 +3,15 @@
 <div id="content-wrapper">
 	<div class="container-fluid">
 		<div>
-		    <h1>Login</h1>
+		    <h1 style="text-align:center;">Login</h1>
 	    </div>
-	    <form method="post" action="{% url 'login' %}">
+	    <form method="post" action="{% url 'login' %}" style="text-align:center;">
 		    {% csrf_token %}
 		    {{ form.as_p }}
-		    <div><button type="submit", class="btn btn-success", value="save">Submit Login</button>
+		    <div><button type="submit", class="btn btn-success", value="save">로그인</button>
+				<a href="{% url 'index' %}"><button type="button" class="btn btn-primary">뒤로 가기</button></a>
             </div>
 	    </form>
-		<a href="{% url 'index' %}"><button type="button" class="btn btn-primary">Back to List</button></a>
 	</div>
 </div>
 {% endblock content %}

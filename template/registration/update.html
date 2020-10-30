@@ -3,16 +3,18 @@
 <div id="content-wrapper">
 	<div class="container-fluid">
 		<div>
-		    <h1>My Page</h1>
+		    <h1 style="text-align:center;">My page</h1>
 	    </div>
-	    <form method="post" action="{% url 'update' %}">
+	    <form method="post" action="{% url 'update' %}" style="text-align:center;">
 		    {% csrf_token %}
 		    {{ form.as_p }}
-		    <div><button type="submit", class="btn btn-success", value="save">Update</button>
+		    <div>
+				<button type="submit", class="btn btn-success", value="save">정보 수정</button>
+				<a href="{% url 'change_password' %}"><button type="button" class="btn btn-primary">비밀번호 변경</button></a>
+				<a href="{% url 'index' %}"><button type="button" class="btn btn-primary">뒤로 가기</button></a>
+				<a href="{% url 'delete' %}"><button type="button" class="btn btn-danger">계정 삭제</button></a>
             </div>
         </form>
-		<a href="{% url 'index' %}"><button type="button" class="btn btn-primary">Back</button></a>
-		<a href="{% url 'delete' %}"><button type="button" class="btn btn-danger">Delete</button></a>
 	</div>
 </div>
 {% endblock content %}

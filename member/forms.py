@@ -1,8 +1,4 @@
-from django import forms
-# from django.contrib.auth.models import User  # Django 내장모델인 'User'를 import
-from django.contrib.auth.forms import UserCreationForm, \
-    ReadOnlyPasswordHashField, UserChangeForm  # Django 내장 form인 UserCreationForm 을 import
-# Django의 내장 form인 UserCreationForm를 상속하여 UserCreateForm 클래스를 작성
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.core.exceptions import ValidationError
 from django import forms
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
@@ -175,37 +171,35 @@ class UserCreationForm(forms.ModelForm): #UserCreationForm -> forms.ModelForm
 
 
 # 업데이트 폼
-class UserUpdateForm(UserChangeForm):
+class UserUpdateForm(forms.ModelForm): #UserChangeForm
 
-    # password = ReadOnlyPasswordHashField()
-    email = forms.EmailField(
-        label=_('Email'),
-        required=True,
-        widget=forms.EmailInput(
-            attrs={
-                'class': 'form-control',
-                'placeholder': _('Change Email address'),
-                'required': 'False',
-            }
-        )
-    )
-    birth_date = forms.DateTimeField(
-        label=_('Birth_date'),
-        required= True,
-        widget=forms.DateTimeInput(
-            attrs={
-                'class': 'form-control',
-                'placeholder': _('Birth Date'),
-                'required': 'False',
-            }
-        )
-    )
-    image =forms.FileInput()
-    text = forms.Textarea()
+    password = ReadOnlyPasswordHashField()
+    # email = forms.EmailField(
+    #     label=_('Email'),
+    #     widget=forms.EmailInput(
+    #         attrs={
+    #             'class': 'form-control',
+    #             'placeholder': _('Change Email address'),
+    #             'required': 'False',
+    #         }
+    #     )
+    # )
+    # birth_date = forms.DateTimeField(
+    #     label=_('Birth_date'),
+    #     widget=forms.DateTimeInput(
+    #         attrs={
+    #             'class': 'form-control',
+    #             'placeholder': _('Birth Date'),
+    #             'required': 'False',
+    #         }
+    #     )
+    # )
+    # image =forms.FileInput()
+    # text = forms.Textarea()
 
     class Meta:
         model = User
-        fields = ('email', 'birth_date','text','img')
+        fields = ('email', 'password','birth_date','text','img')
 
     # widgets={
     #     'email' : forms.EmailField(required=False),
@@ -221,19 +215,3 @@ class UserUpdateForm(UserChangeForm):
     #     # field does not have access to the initial value
     #     return self.initial["password"]
 
-    def _clean_fields(self):
-        return
-
-    # Help 메시지가 표시되지 않도록 수정
-
-    # def __init__(self, *args, **kwargs):
-    #     super(UserChangeForm, self).__init__(*args, **kwargs)
-    #
-    #     for fieldname in ['username']:
-    #         self.fields[fieldname].help_text = None
-
-    def __init__(self, *args, **kwargs):
-        super(UserChangeForm, self).__init__(*args, **kwargs)
-
-        # for fieldname in ['username']:
-        #     self.fields[fieldname].help_text = None

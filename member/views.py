@@ -1,16 +1,17 @@
-from django.contrib.auth.decorators import login_required
-from django.shortcuts import render
-from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.forms import AuthenticationForm
+# from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
+from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 from .forms import UserCreationForm, UserUpdateForm
 from .models import User
 
 # Create your views here.
 # 마이 페이지에서 자기 정보를 수정하기
-@login_required
+# @login_required
 def update(request):
     if request.method == 'POST':
-        form = UserUpdateForm(request.POST.copy()) #, instance=user
+        form = UserUpdateForm(request.POST.copy(), instance=User) #, instance=user
         if form.is_valid():
             form.save()
         return render(request, 'home/base.html', {'message': "계정 정보가 수정되었습니다."})
@@ -18,10 +19,25 @@ def update(request):
         form = UserUpdateForm()
         return render(request, 'registration/update.html', {'form': form})
 
-@login_required
+
+def change_password(request):
+    if request.method =="POST":
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)
+            messages.success(request, '패스워드가 성공적으로 업데이트 되었습니다.')
+            return redirect('index') #다음 url로 이동한다.
+        else:
+            messages.error(request,"다음 에러를 확인해주세요.")
+    else:
+        form = PasswordChangeForm(request.user)
+    return render(request, 'registration/change_password.html',{'form':form})
+
+# @login_required
 def delete(request):
     if request.method == "POST":
-        request.user.delete()
+        request.User.delete()
         return render(request,'home/base.html')
     return render(request, 'home/base.html')
 
