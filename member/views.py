@@ -10,11 +10,7 @@ from .models import User
 @login_required
 def update(request):
     if request.method == 'POST':
-        # 수정하는 로직 필요
-        # user = request.user
         form = UserUpdateForm(request.POST.copy()) #, instance=user
-        # postdata= request.POST.copy()
-        # form = UserUpdateForm(postdata)
         if form.is_valid():
             form.save()
         return render(request, 'home/base.html', {'message': "계정 정보가 수정되었습니다."})
