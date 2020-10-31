@@ -77,11 +77,19 @@ def profile(request):
         email = request.POST.get('email')
         birth_date = request.POST.get('birth_date')
         img = request.POST.get('img')
+        phone_number = request.POST.get('phone_number')
+        website = request.POST.get('website')
 
         user.bio = text
         user.email = email
-        user.date_of_birth = birth_date
-        user.photo = img
+        user.phone_number = phone_number
+        user.website = website
+
+        # 값이 존재할 때만 넣어줌으로써, Validation Error 해결 !
+        if birth_date :
+            user.date_of_birth = birth_date
+        if img :
+            user.photo = img
 
         user.save()
 

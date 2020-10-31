@@ -9,8 +9,8 @@ Cloning Instagram with Python(Django==3.1.2)
 - [x] Login
 - [x] Logout
 - [x] Change Password
-- [x] User Detail : 이미지 upload !
-- [x] Edit Profile : 이미지 / 생일 업로드 수정할 것 (DB 스키마 변경하기)
+- [x] User Detail : 이미지 출력 문제
+- [x] Edit Profile : 이미지 업로드 문제
 - [ ] My History : 내가 쓴 글 확인하기
 
 url
