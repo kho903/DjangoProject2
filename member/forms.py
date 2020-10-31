@@ -198,7 +198,7 @@ class UserUpdateForm(forms.ModelForm): #UserChangeForm
 
     class Meta:
         model = User
-        fields = ('email', 'password','birth_date','text','img')
+        fields = ('email', 'password','date_of_birth','bio','photo')
 
     # widgets={
     #     'email' : forms.EmailField(required=False),

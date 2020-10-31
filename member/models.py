@@ -12,7 +12,7 @@ class User(AbstractUser):
     photo = models.ImageField(upload_to='user/%Y/%m/%d', null=True, blank=True) # 프로필 사진
     phone_number = models.CharField(null= True, blank=True, max_length=20) # 전화번호
     date_of_birth = models.DateField(null=True, blank=True) # 생일
-    website = models.CharField(null=True, blank=True) # 웹사이트
+    website = models.CharField(null=True, blank=True, max_length=100) # 웹사이트
 
 
 # class Member(models.Model):
