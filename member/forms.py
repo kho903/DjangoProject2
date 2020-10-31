@@ -97,7 +97,7 @@ from .models import User
 
 # 회원가입 폼
 class UserCreationForm(forms.ModelForm): #UserCreationForm -> forms.ModelForm
-    #email = forms.EmailField(required=True)
+
     username = forms.CharField(
         label=_('username'),
         required=True,
