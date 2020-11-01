@@ -1,6 +1,7 @@
 from django.conf.urls import url
 from . import views
-
+from django.conf.urls.static import static
+from django.conf import settings
 
 urlpatterns = [
     url('join/', views.create_user, name="join"),
@@ -10,3 +11,5 @@ urlpatterns = [
     url('change_password/',views.change_password,name='change_password'),
     url('profile/',views.profile, name='profile')
 ]
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
