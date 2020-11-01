@@ -1,7 +1,6 @@
 from django.conf.urls import url
 from . import views
 
-# app_name='member'
 
 urlpatterns = [
     url('join/', views.create_user, name="join"),

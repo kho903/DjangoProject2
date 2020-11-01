@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
-from .forms import UserCreationForm
+from .forms import UserCreationForm, ImageUploadForm
 from .models import User
 
 # 비밀번호 변경 기능
@@ -68,15 +68,21 @@ def sign_in(request):
 # User profile (프로필 편집 기능)
 def profile(request):
     if request.method == 'GET':
-        return render(request, 'registration/mypage.html')
+        # form = ImageUploadForm(request.POST, request.FILES)
+        return render(request, 'registration/mypage.html') #{'form': form }
 
     elif request.method == 'POST':
         user = request.user
+        # 이미지 저장하기
+        # form = ImageUploadForm(request.POST, request.FILES)
+        # if form.is_valid():
+        #     user.photo = form.cleaned_data['image']
+        #     user.save()
 
         text = request.POST.get('text')
         email = request.POST.get('email')
         birth_date = request.POST.get('birth_date')
-        img = request.POST.get('img')
+        photo = request.POST.get('photo')
         phone_number = request.POST.get('phone_number')
         website = request.POST.get('website')
 
@@ -88,8 +94,8 @@ def profile(request):
         # 값이 존재할 때만 넣어줌으로써, Validation Error 해결 !
         if birth_date :
             user.date_of_birth = birth_date
-        if img :
-            user.photo = img
+        if photo :
+            user.photo = photo
 
         user.save()
 

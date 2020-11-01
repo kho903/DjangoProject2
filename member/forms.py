@@ -215,3 +215,10 @@ class UserUpdateForm(forms.ModelForm): #UserChangeForm
     #     return self.initial["password"]
     def clean_password(self):
         return self.initial["password"]
+
+class ImageUploadForm(forms.Form):
+    """Image upload form."""
+    image = forms.ImageField()
+
+    def _clean_fields(self):
+        return self.cleaned_data.get('image')
