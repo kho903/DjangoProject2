@@ -8,11 +8,19 @@
         <img src="../{{ object.img.url|slice:'1:' }}" class="card-img-top" alt="...">
 
         <div class="card-body">
+            {% if user in object.like.all %}
+                <input type="button" class="like liked" name="{{ object.id }}">
+            {% else %}
+                <input type="button" class="like to-like" name="{{ object.id }}">
+            {% endif %}
+            <p class="like-count" id="count-{{ object.id }}">좋아요 {{ object.like_count }}개</p>
             <p class="card-text">{{ object.text }}</p>
         </div>
+
         <ul class="list-group list-group-flush">
             <li class="list-group-item">올린 날짜 : {{ object.created }}</li>
         </ul>
+
         <ul>
             <a href="{% url 'photo:update' object.id %}" class="card-link">수정하기</a>
             <a href="{% url 'photo:delete' object.id %}" class="card-link">삭제하기</a>
@@ -46,13 +54,14 @@
             src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
 
     <script type="text/javascript">
+        // 댓글
         $(document).ready(function () {
             $('#create_comment').click(function () {
                 var text = $("#text").val();
                 var user = $("#create_comment_user").val();
                 $.ajax({
                     type: "POST",
-                    url: "{% url 'photo:create_comment' photo.id %}",
+                    url: "{% url 'photo:create_comment' object.id %}",
                     dataType: "json",
                     data: {
                         'user': user,
@@ -61,18 +70,44 @@
                     },
                     success: function (response) {
                         // 여기 고치면 댓글 될거 같음
-                        {#$("#comment_list").append("<p>" + response.text + "</p><br>")#}
-                        $("#text").val(' ');
+                        console.log(response.message);
+                        $("#comment_list").append(
+                            '<p><span><a href="#">' + user + '</a> <span> : ' + text + '</span>'
+                        );
+                        $("#text").val('');
                     },
-                    error: function (request,status,error) {
-                        if ($('#text').val() == "") {
+                    error: function (request, status, error) {
+                        if ($('#text').val('')) {
                             alert('댓글을 입력해주세요.');
                         }
-                        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error)
-
+                        {#alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);#}
                     },
                 })
             });
         });
+
+        // 좋아요
+        $(document).on('click', '.like', function () {
+            var pk = $(this).attr('name');
+            $.ajax({
+                type: "POST",
+                url: "{% url 'photo:like' photo.id %}",
+                data: {
+                    'pk': pk,
+                    'csrfmiddlewaretoken': '{{csrf_token}}',
+                },
+                dataType: "json",
+
+                success: function (response) {
+                    alert(response.message);
+
+                    $("#count-" + pk).html("좋아요 " + response.like_count + "개");
+
+                },
+                error: function (request, status, error) {
+                    alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+                }
+            })
+        })
     </script>
 {% endblock %}

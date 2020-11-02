@@ -31,11 +31,11 @@ http://127.0.0.1:8000/member/change_password/
 - [x] Update
 - [x] Delete
 - [x] DetailView
-- [ ] Comments - 댓글 달기 현재 ajax로 구현중 - 약간의 오류로 인해 댓글을 달고 새로고침을 누르면 추가가 됨 - 고칠예정
+- [x] Comments - 깔끔한 방법은 아니지만 돌아감, 수정예정, 순서로직 부정확
 - [x] Search - 아직 텍스트의 search만
 - [x] User 
 - [ ] Hashtag
-- [ ] Likes
+- [ ] Likes - 시도했으나 이상...... 코멘트와 같이 ajax를 활용한 방법 사용중
 
 url
 

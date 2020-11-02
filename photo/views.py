@@ -69,26 +69,28 @@ class PhotoDetail(DetailView):
 @login_required
 def create_comment(request, pk):
     photo = get_object_or_404(Photo, id=pk)
-    user = request.user
+    user = request.user._wrapped  # <SimpleLazyObject로 받아와져서 ._wrapped 추가해서 없애도 같은 증상
+    # TypeError: Object of type User is not JSON serializable
     text = request.POST.get('text')
     if text:
         comment = Comment.objects.create(photo=photo, user=user, text=text)
         comment.save()
         photo.save()
         data = {
-            'user': user,
-            'photo': photo,
-            'text': text,
+            'user': str(user),
+            'photo': str(photo),
+            'text': str(text),
             'created': '방금 전',
             'comment_id': comment.id
         }
+        print(data)
         return HttpResponse(json.dumps(data, cls=DjangoJSONEncoder), content_type="application/json")
 
     # if request.method == 'POST':
     #     comment = Comment()
     #     comment.text = request.POST['text']
     #     comment.photo = Photo.objects.get(pk=request.POST['Photo'])
-    #     comment.user = request.user.username
+    #     comment.user = request.user
     #     comment.save()
     #     return redirect('/photo/' + str(comment.photo.id))
     # else:
@@ -109,3 +111,45 @@ def delete_comment(request, pk):
             'comment_id': comment_id
         }
         return HttpResponse(json.dumps(data, cls=DjangoJSONEncoder), content_type="application/json")
+
+
+# @login_required
+# def Like(request, pk):
+#     photo = get_object_or_404(Photo, id=pk)
+#
+#     Like, like_created = photo.like.get_or_create(user=request.user)
+#
+#     if not like_created:
+#         Like.delete()
+#         message = "좋아요 취소"
+#     else:
+#         message = "좋아요!"
+#
+#     data = {
+#         'like_count': photo.like_count,
+#         'message': message,
+#         'user': request.user
+#     }
+#     print(data)
+#     return HttpResponse(json.dumps(data), content_type='application/json')
+#
+
+def Like(request):
+    if request.is_ajax():  # ajax 방식일 때 아래 코드 실행
+        photo_id = request.GET['photo_id']  # 좋아요를 누른 게시물id (blog_id)가지고 오기
+        photo = Photo.objects.get(id=photo_id)
+
+        if not request.user.is_authenticated:
+            message = "로그인이 필요합니다!"
+            context = {'like_count': photo.like.count(), "message": message}
+            return HttpResponse(json.dumps(context), content_type='application/json')
+
+        user = request.user
+        if photo.like.filter(id=user.id).exists():
+            photo.like.remove(user)
+            message = "좋아요 취소"
+        else:
+            photo.like.add(user)
+            message = "좋아요"
+        context = {'like_count': photo.like.count(), "message": message}
+        return HttpResponse(json.dumps(context), content_type='application/json')

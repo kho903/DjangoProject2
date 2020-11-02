@@ -12,6 +12,11 @@ class Photo(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user')
+    like = models.ManyToManyField(User, blank=True, related_name='like', through='Like')
+
+    @property
+    def like_count(self):
+        return self.like.count()
 
     def __str__(self):
         return self.text
@@ -31,3 +36,10 @@ class Comment(models.Model):
 
     class Meta:
         ordering = ['-created']
+
+
+class Like(models.Model):
+    user = models.ForeignKey('member.User', on_delete=models.CASCADE, related_name='like_user')
+    photo = models.ForeignKey('Photo', on_delete=models.CASCADE, related_name='like_photo')
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
