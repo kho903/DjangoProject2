@@ -50,6 +50,7 @@
                     <div class="dropdown-menu">
                         <a class="dropdown-item" href="{% url 'logout' %}">Logout from [ {{user.username}} ]</a>
                         <a class="dropdown-item" href="{% url 'profile' %}">My Profile</a>
+                         <a class="dropdown-item" href="{% url 'profile_update' %}">Profile</a>
                         <a class="dropdown-item" href="{% url 'people' user.username %}">About Me</a>
                     </div>
                 {% else %}

@@ -225,7 +225,66 @@ class ImageUploadForm(forms.Form):
 
 
 class ProfileForm(forms.ModelForm):
-
+    username = forms.CharField(
+        label=_('username'),
+        widget=forms.TextInput(
+            attrs={
+                'class': 'form-control',
+                'placeholder': _('username'),
+                'required': 'False',
+            }
+        )
+    )
+    email = forms.EmailField(
+        label=_('Email'),
+        widget=forms.EmailInput(
+            attrs={
+                'class': 'form-control',
+                'placeholder': _('Change Email address'),
+                'required': 'False',
+            }
+        )
+    )
+    date_of_birth = forms.DateField(
+        label=_('date of birth'),
+        widget=forms.DateInput(
+            attrs={
+                'class': 'form-control',
+                'placeholder': _(''),
+                'required': 'False',
+            }
+        )
+    )
+    bio = forms.CharField(
+        label=_('bio'),
+        widget=forms.TextInput(
+            attrs={
+                'class': 'form-control',
+                'placeholder': _('bio'),
+                'required': 'False',
+            }
+        )
+    )
+    phone_number = forms.CharField(
+        label=_('phone_number'),
+        widget=forms.TextInput(
+            attrs={
+                'class': 'form-control',
+                'placeholder': _('phone number'),
+                'required': 'False',
+            }
+        )
+    )
+    website = forms.CharField(
+        label=_('website'),
+        widget=forms.TextInput(
+            attrs={
+                'class': 'form-control',
+                'placeholder': _('website'),
+                'required': 'False',
+            }
+        )
+    )
     class Meta:
         model = User
-        fields=('username','password','photo','bio','phone_number','date_of_birth', 'website')
+        fields=('username','email','bio','phone_number','date_of_birth', 'website','photo')
