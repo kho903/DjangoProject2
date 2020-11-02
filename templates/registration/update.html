@@ -10,9 +10,9 @@
 		    {{ form.as_p }}
 		    <div>
 				<button type="submit", class="btn btn-success", value="save">정보 수정</button>
-				<a href="{% url 'member:change_password' %}"><button type="button" class="btn btn-primary">비밀번호 변경</button></a>
-				<a href="{% url 'member:index' %}"><button type="button" class="btn btn-primary">뒤로 가기</button></a>
-				<a href="{% url 'member:delete' %}"><button type="button" class="btn btn-danger">계정 삭제</button></a>
+				<a href="{% url 'change_password' %}"><button type="button" class="btn btn-primary">비밀번호 변경</button></a>
+				<a href="{% url 'index' %}"><button type="button" class="btn btn-primary">뒤로 가기</button></a>
+				<a href="{% url 'delete' %}"><button type="button" class="btn btn-danger">계정 삭제</button></a>
             </div>
         </form>
 	</div>

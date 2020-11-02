@@ -129,6 +129,10 @@ def people(request,username):
     people = get_object_or_404(User, username=username)
     return render(request, "profile/people.html",{'people': people})
 
+def peoplePage(request,username):
+    people = get_object_or_404(User, username=username)
+    return render(request, "profile/people.html",{'people': people})
+
 
 def follow(request, user_id):
     people = get_object_or_404(get_user_model(), id=user_id)

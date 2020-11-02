@@ -141,3 +141,12 @@ MEDIA_URL = '/media/'
 # 커스텀 유저 모델을 생성하기 위한 셋팅
 AUTH_USER_MODEL = 'member.User'
 
+STATIC_URL = '/static/'
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
+STATICFILES_FINDERS = [
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+]
+
