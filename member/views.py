@@ -123,7 +123,8 @@ def profile_update(request):
 
 
 class UserList(ListView):
-    model = User
+    # person = get_object_or_404(User, username=username)
+    model = User.followers
     template_name_suffix="_list"
 
 # 게시물의 작성자의 username을 통해 user 페이지에 접근하기
