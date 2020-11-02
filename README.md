@@ -8,10 +8,11 @@ Cloning Instagram with Python(Django==3.1.2)
 - [x] Join
 - [x] Login
 - [x] Logout
+- [x] Delete
 - [x] Change Password
-- [x] User Detail : 이미지 출력 문제
+- [x] User Detail
 - [x] Edit Profile : 이미지 업로드 문제
-- [ ] My History : 내가 쓴 글 확인하기
+- [x] Follow : people (개인) 페이지로의 연결고리 필요
 
 url
 

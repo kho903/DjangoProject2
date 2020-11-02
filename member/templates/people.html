@@ -1,0 +1,33 @@
+{% extends 'home/base.html' %}
+{% block container %}
+<div class="container">
+    <div class="row">
+        <div class="col-3">
+            <h1>
+            {% if people.photo %}
+            <img src="{{ people.photo.url }}" width= 70,
+                 alt="{{ people.photo}}">
+            {% endif %}
+            {{ people.username }}
+            </h1>
+        </div>
+        <div class="col-9">
+            <div>
+                <strong>{{ people.username }}</strong>
+                {{ people.followers.all }}
+                {% if user != people %}
+                    {% if user in people.followers.all %}
+                    <a href="{% url 'follow' people.id %}">UnFollow</a>
+                    {% else %}
+                    <a href="{% url 'follow' people.id %}">Follow</a>
+                    {% endif %}
+                {% endif %}
+            </div>
+            <div>
+                <strong> Followers: </strong> {{ people.followers.count }}
+                <strong> Followings: </strong> {{ people.followings.count }}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 # Create your models here.
@@ -13,6 +14,22 @@ class User(AbstractUser):
     phone_number = models.CharField(null= True, blank=True, max_length=20) # 전화번호
     date_of_birth = models.DateField(null=True) # 생일
     website = models.CharField(null=True, blank=True, max_length=100) # 웹사이트
+    followers = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='followings') # follow 기능을 위해 추가함.
+    # related_name : 정참조하고 있는 클래스의 인스턴스에서 거꾸로 호출(역참조 할지를 정해주는 이름)
+
+# class Follow(models.Model):
+#     # Foreign Key  : 다대일 관계, (User, on_delete=models.CASCADE) : 자신과의 다대일 관계 (재귀관계)
+#     who = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
+#     following = models.CharField(default='0', max_length=5000)
+#     follower = models.CharField(default='0', max_length=5000)
+
+
+
+
+
+
+
+
 
 
 # class Member(models.Model):

@@ -1,10 +1,14 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
+from django.contrib.auth import authenticate, login, logout, update_session_auth_hash, get_user_model
 from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
+from django.views.generic import ListView
+from rest_framework.generics import get_object_or_404
+
 from .forms import UserCreationForm, ImageUploadForm
 from .models import User
+
 
 # 비밀번호 변경 기능
 def change_password(request):
@@ -100,3 +104,47 @@ def profile(request):
         user.save()
 
         return redirect('member/profile', user.username)
+
+
+class UserList(ListView):
+    model = User
+    template_name_suffix="_list"
+
+
+def people(request):
+    return render(request, "people.html")
+
+
+def follow(request, user_id):
+    people = get_object_or_404(get_user_model(), id=user_id)
+    if request.user in people.followers.all():
+        # people을 unfollow하기
+        people.followers.remove(request.user)
+    else:
+        # people을 follow하기
+        people.followers.add(request.user)
+    return redirect('/')
+
+# class Following():
+#
+#     def get(self, request, *args, pk):
+#         if not request.user.is_authenticated:
+#             return redirect('login/')
+#         else:
+#             user = request.user
+#             opponent = User.objects.get(pk=pk)
+#             if user != opponent:
+#                 if not Follow.objects.filter(who=user):
+#                     Follow.objects.create(who=user)
+#                 if not Follow.objects.filter(who=opponent):
+#                     Follow.objects.create(who=user)
+#                 I =  Follow.objects.get(who=user.id)
+#                 You = Follow.objects.get(who=opponent.id)
+#
+#                 if str(opponent.id) not in I.following.split():
+#                     pass
+#
+#
+#
+# def Unfollow():
+#     return None

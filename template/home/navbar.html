@@ -2,27 +2,25 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+      <meta name="viewpoint" content="width=device-width, initial-scale=1.0, minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
     <title>Title</title>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+<nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
     <a class="navbar-brand mx-5 mb-0 font-weight-bold font-italic" href="{% url 'index' %}">instagram</a>
+<!--    <a href="{% url 'index' %}">-->
+<!--         <img src="insta/media/image/instagram.png" class="logo" width="150" height="50">-->
+<!--    </a>-->
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item mx-1 btn btn-primary">
-                <a href="{% url 'photo:create' %}" class="nav-link text-white">Upload</a>
+            <li class="nav-item mx-1 btn ">
+                <a href="{% url 'photo:create' %}" class="nav-link " >Upload</a>
             </li>
-            <li class="nav-item mx-1 btn btn-primary">
-            </li>
-            <li class="nav-item mx-1 btn btn-primary">
-            </li>
-            <li class="nav-item mx-1 btn btn-primary">
-            </li>
-            <li class="nav-item dropdown mx-1 btn btn-primary">
-                <a class="nav-link dropdown-toggle text-white" href="#" data-toggle="dropdown">
+            <li class="nav-item dropdown mx-1 btn ">
+                <a class="nav-link dropdown-toggle " href="#" data-toggle="dropdown">
                     Util
                 </a>
                 <div class="dropdown-menu">
@@ -30,42 +28,32 @@
                 </div>
             </li>
         </ul>
-
-        <li class="nav-item dropdown mx-1 btn btn-primary">
-            <a class="nav-link dropdown-toggle text-white" href="#" data-toggle="dropdown">
-                Add
-            </a>
-            <div class="dropdown-menu">
-                <div class="dropdown-divider"></div>
-            </div>
-        </li>
-
-        <li class="nav-item dropdown mx-1 btn btn-primary">
-            <a class="nav-link dropdown-toggle text-white" href="#" data-toggle="dropdown">
-                helloooo
-            </a>
-            <div class="dropdown-menu">
-                <div class="dropdown-divider"></div>
-            </div>
-        </li>
+<!--        <li class="nav-item dropdown mx-1 btn ">-->
+<!--            <a class="nav-link dropdown-toggle " href="#" data-toggle="dropdown">-->
+<!--                Add-->
+<!--            </a>-->
+<!--            <div class="dropdown-menu">-->
+<!--                <div class="dropdown-divider"></div>-->
+<!--            </div>-->
+<!--        </li>-->
 
         <form class="form-inline my-2" action="" method="post"> {% csrf_token %}
 <!--            <input class="form-control mr-sm-2" type="search" placeholder="Global Search" name=search_word"">-->
         </form>
-
         <ul class="navbar-nav ml-5 mr-5">
-            <li class="nav-item dropdown mx-1 btn btn-primary">
+            <li class="nav-item dropdown mx-1 btn ">
                 {% if user.is_active %}
-                    <a href="#" class="nav-link dropdown-toggle text-white" data-toggle="dropdown">
+                    <a href="#" class="nav-link dropdown-toggle " data-toggle="dropdown">
                         <i class="fas fa-user"></i>&ensp;
                         {% firstof user.get_short_name user.get_username %}&ensp;
                     </a>
                     <div class="dropdown-menu">
                         <a class="dropdown-item" href="{% url 'logout' %}">Logout from [ {{user.username}} ]</a>
                         <a class="dropdown-item" href="{% url 'profile' %}">My Profile</a>
+                        <a class="dropdown-item" href="{% url 'people' %}">About Me</a>
                     </div>
                 {% else %}
-                    <a href="#" class="nav-link dropdown-toggle text-white" data-toggle="dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
                         <i class="fas fa-user"></i>&ensp;
                         Anonymous&ensp;
                     </a>
