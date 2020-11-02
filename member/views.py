@@ -1,3 +1,4 @@
+import response as response
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.shortcuts import render, redirect
@@ -11,6 +12,9 @@ from .models import User
 
 
 # 비밀번호 변경 기능
+from .serializers import UserSerializer
+
+
 def change_password(request):
     if request.method == "POST":
         form = PasswordChangeForm(request.user, request.POST)
@@ -103,7 +107,7 @@ def profile(request):
 
         user.save()
 
-        return redirect('member/profile', user.username)
+        return redirect('member/profile', user)
 
 
 def profile_update(request):
@@ -124,14 +128,12 @@ class UserList(ListView):
 
 # 게시물의 작성자의 username을 통해 user 페이지에 접근하기
 
-
-def people(request,username):
-    people = get_object_or_404(User, username=username)
-    return render(request, "profile/people.html",{'people': people})
-
 def peoplePage(request,username):
-    people = get_object_or_404(User, username=username)
-    return render(request, "profile/people.html",{'people': people})
+    person = get_object_or_404(User, username=username)
+    # serializer = UserSerializer(person)
+    # return response(serializer.data)
+    person = request.user
+    return render(request, "profile/people.html",{'people': person})
 
 
 def follow(request, user_id):
@@ -167,3 +169,6 @@ def follow(request, user_id):
 #
 # def Unfollow():
 #     return None
+# def peoplePage2(request, pk):
+#     people = get_object_or_404(get_user_model(), id=pk)
+#     return render(request, "profile/people.html",{'people': people})

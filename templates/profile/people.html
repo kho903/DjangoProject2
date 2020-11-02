@@ -1,9 +1,10 @@
 {% extends 'home/base.html' %}
-{% block container %}
+{% block content %}
 <div class="container">
     <div class="row">
         <div class="col-3">
-            <h1>
+            <h1 style="text-align:center">
+                About Me
             {% if people.photo %}
             <img src="{{ people.photo.url }}" width= 70,
                  alt="{{ people.photo}}">
