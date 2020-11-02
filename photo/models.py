@@ -41,5 +41,3 @@ class Comment(models.Model):
 class Like(models.Model):
     user = models.ForeignKey('member.User', on_delete=models.CASCADE, related_name='like_user')
     photo = models.ForeignKey('Photo', on_delete=models.CASCADE, related_name='like_photo')
-    created = models.DateTimeField(auto_now_add=True)
-    updated = models.DateTimeField(auto_now=True)
