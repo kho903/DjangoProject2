@@ -41,6 +41,8 @@ url
 
 http://127.0.0.1:8000/photo/
 
+http://127.0.0.1:8000/photo/<번호>
+
 http://127.0.0.1:8000/photo/create
 
 http://127.0.0.1:8000/photo/update/<번호>
