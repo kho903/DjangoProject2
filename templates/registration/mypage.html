@@ -11,7 +11,7 @@
          onerror="this.onerror=null; this.src='Default.jpg'">
         </div>
         {% endif %}
-        <form action="{% url 'profile' %}" method="POST" enctype="multipart/form-data">
+        <form action="{% url 'member:profile' %}" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="form-group">
             <label for="photo"> photo :</label>
@@ -37,8 +37,8 @@
             <input type="date" class="form-control" id="birth_date" name="birth_date" value="{{ user.date_of_birth }}">
         </div>
     <button type="submit", class="btn btn-success", value="save">정보 수정</button>
-    <a href="{% url 'change_password' %}"><button type="button" class="btn btn-primary">비밀번호 변경</button></a>
-    <a href="{% url 'delete' %}"><button type="button" class="btn btn-danger">계정 삭제</button></a>
+    <a href="{% url 'member:change_password' %}"><button type="button" class="btn btn-primary">비밀번호 변경</button></a>
+    <a href="{% url 'member:delete' %}"><button type="button" class="btn btn-danger">계정 삭제</button></a>
 </form></div>
 </div>
 

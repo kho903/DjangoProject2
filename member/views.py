@@ -6,7 +6,7 @@ from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 from django.views.generic import ListView
 from rest_framework.generics import get_object_or_404
 
-from .forms import UserCreationForm, ImageUploadForm
+from .forms import UserCreationForm, ProfileForm
 from .models import User
 
 
@@ -106,13 +106,28 @@ def profile(request):
         return redirect('member/profile', user.username)
 
 
+def profile_update(request):
+    user = request.user
+    if request.method == 'POST':
+        profile_form = ProfileForm(request.POST, request.FILES, instance=user)
+        if profile_form.is_valid():
+            profile_form.save()
+        return redirect('people', request.user.username)
+    else:
+        profile_form = ProfileForm(instance=user)
+    return render(request, 'profile/profile_update.html', {'profile_form': profile_form})
+
+
 class UserList(ListView):
     model = User
     template_name_suffix="_list"
 
+# 게시물의 작성자의 username을 통해 user 페이지에 접근하기
 
-def people(request):
-    return render(request, "people.html")
+
+def people(request,username):
+    people = get_object_or_404(User, username=username)
+    return render(request, "profile/people.html",{'people': people})
 
 
 def follow(request, user_id):
@@ -123,7 +138,7 @@ def follow(request, user_id):
     else:
         # people을 follow하기
         people.followers.add(request.user)
-    return redirect('/')
+    return redirect('people')
 
 # class Following():
 #

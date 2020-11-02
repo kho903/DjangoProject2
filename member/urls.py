@@ -3,6 +3,7 @@ from . import views
 from django.conf.urls.static import static
 from django.conf import settings
 
+app_name = "member"
 
 urlpatterns = [
     url('join/', views.create_user, name="join"),
@@ -11,9 +12,11 @@ urlpatterns = [
     url('delete/',views.delete, name='delete'),
     url('change_password/',views.change_password,name='change_password'),
     url('profile/',views.profile, name='profile'),
+    url('profile_update/',views.profile_update, name='profile_update'),
     url('follow/',views.follow, name='follow'),
     url('user_list/',views.UserList, name='Userlist'),
-    url('people/',views.people,name="people")
+    url('people/<str:username>/',views.people, name="people")  # str uuid
+
     # url('follow/<int:pk>/',views.Following, name='follow'),
     # url('unfollow/<int:pk>/',views.Unfollow, name='unfollow'),
 ]

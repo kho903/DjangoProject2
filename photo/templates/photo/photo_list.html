@@ -8,7 +8,9 @@
 
                     <div class="card">
                         <div class="card-header">
-                            <p class="card-text">{{ object.user }}</p>
+                            <a href="{% url 'member:people' object.user.username %}">
+                                <p class="card-text">{{ object.user }}</p>
+                            </a>
                         </div>
                         <img src="{{ object.img.url|slice:'1:' }}" class="card-img-top" alt="...">
 

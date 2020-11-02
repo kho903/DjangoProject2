@@ -48,9 +48,9 @@
                         {% firstof user.get_short_name user.get_username %}&ensp;
                     </a>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="{% url 'logout' %}">Logout from [ {{user.username}} ]</a>
-                        <a class="dropdown-item" href="{% url 'profile' %}">My Profile</a>
-                        <a class="dropdown-item" href="{% url 'people' %}">About Me</a>
+                        <a class="dropdown-item" href="{% url 'member:logout' %}">Logout from [ {{user.username}} ]</a>
+                        <a class="dropdown-item" href="{% url 'member:profile' %}">My Profile</a>
+                        <a class="dropdown-item" href="{% url 'member:people' %}">About Me</a>
                     </div>
                 {% else %}
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
@@ -58,8 +58,8 @@
                         Anonymous&ensp;
                     </a>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="{% url 'login' %}">Login</a>
-                        <a class="dropdown-item" href="{% url 'join' %}">Register</a>
+                        <a class="dropdown-item" href="{% url 'member:login' %}">Login</a>
+                        <a class="dropdown-item" href="{% url 'member:join' %}">Register</a>
                     </div>
                 {% endif %}
             </li>

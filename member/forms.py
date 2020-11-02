@@ -222,3 +222,10 @@ class ImageUploadForm(forms.Form):
 
     def _clean_fields(self):
         return self.cleaned_data.get('image')
+
+
+class ProfileForm(forms.ModelForm):
+
+    class Meta:
+        model = User
+        fields=('username','password','photo','bio','phone_number','date_of_birth', 'website')
