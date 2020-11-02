@@ -130,21 +130,18 @@ class UserList(ListView):
 
 def peoplePage(request,username):
     person = get_object_or_404(User, username=username)
-    # serializer = UserSerializer(person)
-    # return response(serializer.data)
-    person = request.user
     return render(request, "profile/people.html",{'people': person})
 
 
-def follow(request, user_id):
-    people = get_object_or_404(get_user_model(), id=user_id)
+def follow(request, username):
+    people = get_object_or_404(get_user_model(), username=username)
     if request.user in people.followers.all():
         # people을 unfollow하기
         people.followers.remove(request.user)
     else:
         # people을 follow하기
         people.followers.add(request.user)
-    return redirect('people')
+    return redirect('index')
 
 # class Following():
 #

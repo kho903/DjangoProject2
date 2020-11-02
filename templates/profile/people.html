@@ -18,9 +18,9 @@
                 {{ people.followers.all }}
                 {% if user != people %}
                     {% if user in people.followers.all %}
-                    <a href="{% url 'follow' people.id %}">UnFollow</a>
+                    <a href="{% url 'follow' people.username %}">UnFollow</a>
                     {% else %}
-                    <a href="{% url 'follow' people.id %}">Follow</a>
+                    <a href="{% url 'follow' people.username %}">Follow</a>
                     {% endif %}
                 {% endif %}
             </div>

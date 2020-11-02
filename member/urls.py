@@ -16,10 +16,10 @@ urlpatterns = [
     url('change_password/',views.change_password,name='change_password'),
     url('profile/',views.profile, name='profile'),
     url('profile_update/',views.profile_update, name='profile_update'),
-    url('follow/',views.follow, name='follow'),
     url('user_list/',views.UserList, name='Userlist'),
     # url('people/(?P<username>\d+)/',views.people, name="people"),  # <str:username> !!URL 문제
     path('people/<str:username>/', views.peoplePage , name="people"),
+    path('follow/<str:username>/',views.follow, name='follow'),
     # path('people/<int:pk>/', views.peoplePage2 , name="people"),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

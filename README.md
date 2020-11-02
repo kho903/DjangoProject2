@@ -11,8 +11,8 @@ Cloning Instagram with Python(Django==3.1.2)
 - [x] Delete
 - [x] Change Password
 - [x] User Detail
-- [x] Edit Profile : 이미지 업로드 문제
-- [x] Follow : people (개인) 페이지로의 연결고리 필요
+- [x] Edit Profile 
+- [x] Follow 
 
 url
 
