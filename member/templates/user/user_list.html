@@ -3,8 +3,8 @@
    {% for object in object_list %}
      <tr>
        <td>{{ object.username }}</td>
-       <td><a href="{% url 'follow' object.id %}" class="btn btn-xs btn-outline-success">Follow</a></td>
-       <td><a href="{% url 'unfollow' object.id %}" class="btn btn-xs btn-outline-success">UnFollow</a></td>
+       <td><a href="{% url 'follow' object.username %}" class="btn btn-xs btn-outline-success">Follow</a></td>
+       <td><a href="{% url 'unfollow' object.username %}" class="btn btn-xs btn-outline-success">UnFollow</a></td>
      </tr>
    {% endfor %}
 {% endblock %}
