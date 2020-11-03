@@ -1,6 +1,6 @@
 from django.urls import path
 from .views import PhotoCreate, PhotoList, PhotoUpdate, PhotoDelete, PhotoSearchView, create_comment, delete_comment, \
-    PhotoDetail, Like
+    PhotoDetail, Like, TagPhotoView, TagcloudTV
 
 from django.conf.urls.static import static
 from django.conf import settings
@@ -17,6 +17,9 @@ urlpatterns = [
     path("delete/<int:pk>/", PhotoDelete.as_view(), name='delete'),
     path("search/", PhotoSearchView.as_view(), name='search'),
     path("<int:pk>/like", Like, name='like'),
+    path('tag/', TagcloudTV.as_view(), name='tag_cloud'),
+    path('tag/<str:tag>', TagPhotoView.as_view(), name='tagged_object_list'),
+
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

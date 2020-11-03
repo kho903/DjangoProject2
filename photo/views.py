@@ -9,7 +9,7 @@ from django.db.models import Q
 from .forms import PostSearchForm
 
 from django.views.generic.list import ListView
-from django.views.generic import CreateView, UpdateView, DeleteView, FormView, DetailView
+from django.views.generic import CreateView, UpdateView, DeleteView, FormView, DetailView, TemplateView
 
 from .models import Photo, Comment
 
@@ -17,7 +17,7 @@ from .models import Photo, Comment
 class PhotoCreate(LoginRequiredMixin, CreateView):
     login_url = '/member/login/'
     model = Photo
-    fields = ['text', 'img']
+    fields = ['text', 'img', 'tags']
     template_name_suffix = '_create'
     success_url = '/photo'
 
@@ -35,7 +35,7 @@ class PhotoList(ListView):
 
 class PhotoUpdate(UpdateView):
     model = Photo
-    fields = ['text', 'img']
+    fields = ['text', 'img', 'tags']
     template_name_suffix = '_update'
     success_url = '/photo'
 
@@ -117,3 +117,21 @@ def Like(request, pk):
         message = "좋아요"
     context = {'like_count': photo.like.count(), "message": message}
     return HttpResponse(json.dumps(context), content_type='application/json')
+
+
+class TagPhotoView(ListView):
+    template_name = 'taggit/taggit_post_list.html'
+    model = Photo
+
+    def get_queryset(self):
+        return Photo.objects.filter(tags__name=self.kwargs.get('tag'))
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['tagname'] = self.kwargs['tag']
+        return context
+
+
+
+class TagcloudTV(TemplateView):
+    template_name = 'taggit/taggit_cloud.html'

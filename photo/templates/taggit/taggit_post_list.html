@@ -1,0 +1,37 @@
+{% extends 'home/base.html' %}
+
+{% block title %}taggit_post_list.html{% endblock %}
+
+{% block content %}
+    <h1>Posts for tag - {{ tagname }}</h1>
+    <br/>
+
+    {% for object in photo_list %}
+
+        <div class="card">
+            <div class="card-header">
+                <a href="{% url 'people' object.user %}">
+                    <p class="card-text">{{ object.user }}</p>
+                </a>
+            </div>
+            <img src="../{{ object.img.url|slice:'1:' }}" class="card-img-top" alt="...">
+
+            <div class="card-body">
+                <p class="card-text">{{ object.text }}</p>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">올린 날짜 : {{ object.created }}</li>
+            </ul>
+            <ul>
+                <a href="{% url 'photo:detail' object.id %}" class="card-link">자세히 보기</a>
+                <a href="{% url 'photo:update' object.id %}" class="card-link">수정하기</a>
+                <a href="{% url 'photo:delete' object.id %}" class="card-link">삭제하기</a>
+            </ul>
+
+            {% for comment in photo.comments.all %}
+                <p><span> {{ comment.user }} </span> : {{ comment.text }} </p>
+            {% endfor %}
+        </div>
+        <br><br><br>
+    {% endfor %}
+{% endblock %}

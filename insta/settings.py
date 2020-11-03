@@ -42,7 +42,12 @@ INSTALLED_APPS = [
     'rest_auth',  # 추가해준다.
     'member.apps.MemberConfig',  # 앱 추가
     'photo.apps.PhotoConfig',
+<<<<<<< Updated upstream
     'bootstrap4'
+=======
+    'taggit.apps.TaggitAppConfig',
+    'taggit_templatetags2'
+>>>>>>> Stashed changes
 ]
 
 MIDDLEWARE = [
@@ -149,5 +154,5 @@ MEDIA_URL = '/media/'
 # 커스텀 유저 모델을 생성하기 위한 셋팅
 AUTH_USER_MODEL = 'member.User'
 
-
-
+TAGGIT_CASE_INSENSITIVE = True
+TAGGIT_LIMIT = 50
