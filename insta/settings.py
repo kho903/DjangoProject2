@@ -44,8 +44,10 @@ INSTALLED_APPS = [
     'photo.apps.PhotoConfig',
     'bootstrap4'
     'taggit.apps.TaggitAppConfig',
+    'taggit_templatetags2',
+    'bootstrap4',
+    'taggit.apps.TaggitAppConfig',
     'taggit_templatetags2'
-
 ]
 
 MIDDLEWARE = [
