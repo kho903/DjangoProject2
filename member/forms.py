@@ -1,3 +1,4 @@
+import required as required
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.core.exceptions import ValidationError
 from django import forms
@@ -225,66 +226,80 @@ class ImageUploadForm(forms.Form):
 
 
 class ProfileForm(forms.ModelForm):
-    username = forms.CharField(
-        label=_('username'),
-        widget=forms.TextInput(
-            attrs={
-                'class': 'form-control',
-                'placeholder': _('username'),
-                'required': 'False',
-            }
-        )
-    )
-    email = forms.EmailField(
-        label=_('Email'),
-        widget=forms.EmailInput(
-            attrs={
-                'class': 'form-control',
-                'placeholder': _('Change Email address'),
-                'required': 'False',
-            }
-        )
-    )
-    date_of_birth = forms.DateField(
-        label=_('date of birth'),
-        widget=forms.DateInput(
-            attrs={
-                'class': 'form-control',
-                'placeholder': _('YYYY-MM-DD'),
-                'required': 'False',
-            }
-        )
-    )
-    bio = forms.CharField(
-        label=_('bio'),
-        widget=forms.TextInput(
-            attrs={
-                'class': 'form-control',
-                'placeholder': _('bio'),
-                'required': 'False',
-            }
-        )
-    )
-    phone_number = forms.CharField(
-        label=_('phone number'),
-        widget=forms.TextInput(
-            attrs={
-                'class': 'form-control',
-                'placeholder': _('phone number'),
-                'required': 'False',
-            }
-        )
-    )
-    website = forms.CharField(
-        label=_('website'),
-        widget=forms.TextInput(
-            attrs={
-                'class': 'form-control',
-                'placeholder': _('website'),
-                'required': 'False',
-            }
-        )
-    )
+    # username = forms.CharField(
+    #     label=_('username'),
+    #     widget=forms.TextInput(
+    #         attrs={
+    #             'class': 'form-control',
+    #             'placeholder': _('username'),
+    #         }
+    #     )
+    # )
+    # email = forms.EmailField(
+        # label=_('Email'),
+    #     widget=forms.EmailInput(
+    #         attrs={
+    #             'class': 'form-control',
+    #             'placeholder': _('Change Email address'),
+    #             # 'required': 'False',
+    #             # 'blank': 'False',
+    #         }
+    #     )
+    # )
+    # date_of_birth = forms.DateField(
+    #     label=_('date of birth'),
+    #     widget=forms.DateInput(
+    #         attrs={
+    #             'class': 'form-control',
+    #             'placeholder': _('YYYY-MM-DD'),
+    #             # 'required': 'False',
+    #             # 'blank': 'False',
+    #         }
+    #     )
+    # )
+    # bio = forms.CharField(
+    #     label=_('bio'),
+    #     widget=forms.TextInput(
+    #         attrs={
+    #             'class': 'form-control',
+    #             'placeholder': _('bio'),
+    #             # 'required': 'False',
+    #             # 'blank': 'False',
+    #         }
+    #     )
+    # )
+    # phone_number = forms.CharField(
+    #     label=_('phone number'),
+    #     widget=forms.TextInput(
+    #         attrs={
+    #             'class': 'form-control',
+    #             'placeholder': _('phone number'),
+    #             # 'required': 'False',
+    #             # 'blank': 'False',
+    #         }
+    #     )
+    # )
+    # website = forms.CharField(
+    #     label=_('website'),
+    #     widget=forms.TextInput(
+    #         attrs={
+    #             'class': 'form-control',
+    #             'placeholder': _('website'),
+    #             'required': 'False',
+    #             'blank': 'False',
+    #         }
+    #     )
+    # )
     class Meta:
         model = User
         fields=('username','email','bio','phone_number','date_of_birth', 'website','photo')
+
+        # def __init__(self, *args, **kwargs):
+        #     super(ProfileForm, self).__init__(*args, **kwargs)
+        #     self.fields['email'].required = False
+        #     self.fields['bio'].required = False
+        #     self.fields['phone_number'].required = False
+        #     self.fields['date_of_birth'].required = False
+        #     self.fields['website'].required = False
+        #     self.fields['photo'].required = False
+        #

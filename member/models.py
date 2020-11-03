@@ -10,9 +10,9 @@ from django.db import models
 class User(AbstractUser):
 
     bio = models.TextField(null=True, blank=True) # 소개
-    photo = models.ImageField(upload_to='user/%Y/%m/%d', null=True) # 프로필 사진
+    photo = models.ImageField(upload_to='user/%Y/%m/%d', null=True, blank=True) # 프로필 사진
     phone_number = models.CharField(null= True, blank=True, max_length=20) # 전화번호
-    date_of_birth = models.DateField(null=True) # 생일
+    date_of_birth = models.DateField(null=True, blank=True) # 생일
     website = models.CharField(null=True, blank=True, max_length=100) # 웹사이트
     followers = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='followings') # follow 기능을 위해 추가함.
     # ManyToManyField -> related_name : 정참조하고 있는 클래스의 인스턴스에서 거꾸로 호출(역참조 할지를 정해주는 이름)
