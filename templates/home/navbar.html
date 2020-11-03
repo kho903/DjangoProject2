@@ -6,11 +6,11 @@
     <title>Title</title>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
-    <a class="navbar-brand mx-5 mb-0 font-weight-bold font-italic" href="{% url 'index' %}">instagram</a>
-<!--    <a href="{% url 'index' %}">-->
-<!--         <img src="insta/media/image/instagram.png" class="logo" width="150" height="50">-->
-<!--    </a>-->
+<nav class="navbar navbar-expand-lg fixed-top navbar-light bg-light"> <!-- navbar-dark bg-dark -->
+    <a class="navbar-brand mx-5 mb-0 font-weight-bold font-italic" href="{% url 'index' %}">
+<!--        <img src="/static/image/instagram.png" width="100" height="50">-->
+        Mystagram
+    </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -27,6 +27,7 @@
                     <a class="dropdown-item" href="{% url 'photo:search' %}">Search</a>
                 </div>
             </li>
+
         </ul>
 <!--        <li class="nav-item dropdown mx-1 btn ">-->
 <!--            <a class="nav-link dropdown-toggle " href="#" data-toggle="dropdown">-->
@@ -36,11 +37,26 @@
 <!--                <div class="dropdown-divider"></div>-->
 <!--            </div>-->
 <!--        </li>-->
-
-        <form class="form-inline my-2" action="" method="post"> {% csrf_token %}
+        <form class="form-inline my-2" action="" method="post" > {% csrf_token %}
 <!--            <input class="form-control mr-sm-2" type="search" placeholder="Global Search" name=search_word"">-->
+<!--            <button type="submit">Search</button>-->
         </form>
         <ul class="navbar-nav ml-5 mr-5">
+            <li class="nav-item mx-1 btn ">
+                <a href="{% url 'photo:index' %}" class="nav-link " title="home">
+                    <img src="/static/image/icon/icon-home.png" width="25" height="25">
+                </a>
+            </li>
+            <li class="nav-item mx-1 btn ">
+                <a href="{% url 'photo:create' %}" class="nav-link " title="photo upload">
+                     <img src="/static/image/icon/033-image.png" width="25" height="25">
+                </a>
+            </li>
+            <li class="nav-item mx-1 btn ">
+                <a href="{% url 'index' %}" class="nav-link " title="message">
+                     <img src="/static/image/icon/020-telegram.png" width="25" height="25">
+                </a>
+            </li>
             <li class="nav-item dropdown mx-1 btn ">
                 {% if user.is_active %}
                     <a href="#" class="nav-link dropdown-toggle " data-toggle="dropdown">
@@ -48,10 +64,14 @@
                         {% firstof user.get_short_name user.get_username %}&ensp;
                     </a>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="{% url 'logout' %}">Logout from [ {{user.username}} ]</a>
-                        <a class="dropdown-item" href="{% url 'profile' %}">My Profile</a>
-                         <a class="dropdown-item" href="{% url 'profile_update' %}">Profile</a>
-                        <a class="dropdown-item" href="{% url 'people' user.username %}">About Me</a>
+<!--                        <a class="dropdown-item" href="{% url 'profile' %}">My Profile</a>-->
+                        <a class="dropdown-item" href="{% url 'people' user.username %}">
+                            <img src="/static/image/icon/035-user.png" width="25" height="25">
+                            profile</a>
+                        <a class="dropdown-item" href="{% url 'profile_update' %}">
+                            <img src="/static/image/icon/049-agenda.png" width="25" height="25">
+                            settings</a>
+                        <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
                     </div>
                 {% else %}
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">

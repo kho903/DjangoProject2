@@ -266,7 +266,7 @@ class ProfileForm(forms.ModelForm):
         )
     )
     phone_number = forms.CharField(
-        label=_('phone_number'),
+        label=_('phone number'),
         widget=forms.TextInput(
             attrs={
                 'class': 'form-control',

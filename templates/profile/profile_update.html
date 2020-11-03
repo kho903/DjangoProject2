@@ -4,15 +4,21 @@
 	<div class="container-fluid">
 		<div>
         <h1>Profile Update</h1>
+            <p> If the formation is not correct, it won't be saved! </p>
         <form method='POST' enctype="multipart/form-data">
             {% csrf_token %}
             {{ profile_form }}
 <!--         <input type="submit" value="Submit"/>-->
-            <button type="submit", class="btn btn-success", value="Submit">정보 수정</button>
-        <a href="{% url 'change_password' %}"><button type="button" class="btn btn-primary">비밀번호 변경</button></a>
-        <a href="{% url 'delete' %}"><button type="button" class="btn btn-danger">계정 삭제</button></a>
+            <div></br>
+                <button type="submit", class="btn btn-success", value="Submit">정보 수정</button>
+                <a href="{% url 'change_password' %}">
+                <button type="button" class="btn btn-primary">비밀번호 변경</button></a>
+                <a href="{% url 'delete' %}">
+                <button type="button" class="btn btn-danger">계정 삭제</button></a>
+            </div>
         </form>
         </div>
+        </br>
     </div>
 </div>
 {% endblock %}

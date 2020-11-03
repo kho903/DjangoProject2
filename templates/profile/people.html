@@ -6,32 +6,46 @@
         <div class="col-3">
             <h1 style="text-align:center">
             {% if people.photo %}
-            <img src="{{ people.photo.url }}" width= 100,
-                 alt="{{ people.photo}}">
+                <img src="{{ people.photo.url }}" width= "183" height="183"
+                     alt="{{ people.photo }}"  style="border-radius: 100px;">
+                {% else %}
+                <img src="/static/image/instagram.png" width="183" height="160">
             {% endif %}
-            {{ people.username }}
             </h1>
         </div>
         <div class="col-9">
             <div>
-                <strong>{{ people.username }}</strong>
-
-                {{ people.followers.all }}
+                <h2 class="left">{{ people.username }}</h2>
+<!--                {{ people.followers.all }}-->
                 {% if user != people %}
                     {% if user in people.followers.all %}
-                    <button type="button" class="btn btn-primary lee">
+                    <button type="button" class="btn btn-primary lee left">
                         <a href="{% url 'follow' people.username %}">UnFollow</a>
                     </button>
                     {% else %}
-                    <button type="button" class="btn btn-primary lee">
+                    <button type="button" class="btn btn-primary lee left">
                         <a href="{% url 'follow' people.username %}">Follow</a>
                     </button>
                     {% endif %}
+                {% else %}
+                 <button type="button" class="btn btn-primary lee left">
+                        <a href="{% url 'profile_update' %}">update</a>
+                    </button>
                 {% endif %}
             </div>
             <div>
-               <strong>Followers: </strong> {{ people.followers.count }}
-                <strong> Followings: </strong> {{ people.followings.count }}
+               <h6>
+                   <table width="400" height="100">
+                       <tr>
+                           <td> <strong> 게시물 </strong></td>
+                           <td> <strong> 팔로워 </strong> {{ people.followers.count }}</td>
+                           <td> <strong> 팔로잉 </strong> {{ people.followings.count }}</td>
+                       </tr>
+                   </table>
+                   <div width="300">
+                       {{ people.bio }}
+                   </div>
+                </h6>
             </div>
         </div>
     </div>
@@ -48,6 +62,11 @@
         .lee a:hover{
             color: white;
             text-decoration: none;
+        }
+        .left{
+            float: left,
+            padding : 10px
+
         }
 </style>
 {% endblock %}

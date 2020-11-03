@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-=======
-# import response as response
->>>>>>> 3dc490965978f965c5767e09b786b3055a880ab1
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.shortcuts import render, redirect
@@ -12,7 +8,6 @@ from rest_framework.generics import get_object_or_404
 
 from .forms import UserCreationForm, ProfileForm
 from .models import User
-
 
 def change_password(request):
     if request.method == "POST":
@@ -119,7 +114,7 @@ def profile_update(request):
     user = request.user
     if request.method == 'POST':
         profile_form = ProfileForm(request.POST, request.FILES, instance=user)
-        if profile_form.is_valid():
+        if profile_form.is_valid(): # 단, form이 valid하지 않으면 저장되지 않는다. (예) 생일의 형식이 안맞을 때
             profile_form.save()
         return redirect('people', request.user.username)
     else:
@@ -127,10 +122,10 @@ def profile_update(request):
     return render(request, 'profile/profile_update.html', {'profile_form': profile_form})
 
 #
-# class UserList(ListView):
-#     # person = get_object_or_404(User, username=username)
-#     model = User
-#     template_name_suffix="_list"
+class UserList(ListView):
+    # person = get_object_or_404(User, username=username)
+    model = User
+    template_name_suffix="_list"
 
 #
 # def followlist(request,username):
