@@ -42,12 +42,9 @@ INSTALLED_APPS = [
     'rest_auth',  # 추가해준다.
     'member.apps.MemberConfig',  # 앱 추가
     'photo.apps.PhotoConfig',
-<<<<<<< Updated upstream
-    'bootstrap4'
-=======
+    'bootstrap4',
     'taggit.apps.TaggitAppConfig',
     'taggit_templatetags2'
->>>>>>> Stashed changes
 ]
 
 MIDDLEWARE = [
