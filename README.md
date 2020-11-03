@@ -31,15 +31,17 @@ http://127.0.0.1:8000/member/change_password/
 - [x] Update
 - [x] Delete
 - [x] DetailView
-- [x] Comments - 깔끔한 방법은 아니지만 돌아감, 수정예정, 순서로직 부정확
+- [x] Comments - ajax 활용하여 새로고침X로 댓글 구현(코드 리팩토링 필요), 순서로직 부정확
 - [x] Search - 아직 텍스트의 search만
 - [x] User 
 - [ ] Hashtag
-- [ ] Likes - 시도했으나 이상...... 코멘트와 같이 ajax를 활용한 방법 사용중
+- [x] Likes - comments와 같은 방법으로 구현 (코드 리팩토링 필요)
 
 url
 
 http://127.0.0.1:8000/photo/
+
+http://127.0.0.1:8000/photo/<번호>
 
 http://127.0.0.1:8000/photo/create
 

@@ -9,10 +9,11 @@
 
         <div class="card-body">
             {% if user in object.like.all %}
-                <input type="button" class="like liked" name="{{ object.id }}">
+                <input type="button" class="like liked" name="{{ object.id }}" value="좋아요 취소">
             {% else %}
-                <input type="button" class="like to-like" name="{{ object.id }}">
+                <input type="button" class="like to-like" name="{{ object.id }}" value="좋아요">
             {% endif %}
+            <br><br>
             <p class="like-count" id="count-{{ object.id }}">좋아요 {{ object.like_count }}개</p>
             <p class="card-text">{{ object.text }}</p>
         </div>
@@ -80,7 +81,6 @@
                         if ($('#text').val('')) {
                             alert('댓글을 입력해주세요.');
                         }
-                        {#alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);#}
                     },
                 })
             });
@@ -100,12 +100,16 @@
 
                 success: function (response) {
                     alert(response.message);
-
+                    if (response.message === '좋아요') {
+                        $('.like').val('좋아요 취소');
+                    } else {
+                        $('.like').val('좋아요');
+                    }
                     $("#count-" + pk).html("좋아요 " + response.like_count + "개");
 
                 },
                 error: function (request, status, error) {
-                    alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+                    alert("로그인이 필요합니다.");
                 }
             })
         })

@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+# import response as response
+>>>>>>> 3dc490965978f965c5767e09b786b3055a880ab1
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.shortcuts import render, redirect
