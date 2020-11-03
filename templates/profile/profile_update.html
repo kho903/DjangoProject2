@@ -1,4 +1,5 @@
 {% extends 'home/base.html' %}
+{% load bootstrap4 %}
 {% block content %}
 <div id="content-wrapper">
 	<div class="container-fluid">
@@ -7,7 +8,7 @@
             <p> If the formation is not correct, it won't be saved! </p>
         <form method='POST' enctype="multipart/form-data">
             {% csrf_token %}
-            {{ profile_form }}
+            {% bootstrap_form profile_form %}
 <!--         <input type="submit" value="Submit"/>-->
             <div></br>
                 <button type="submit", class="btn btn-success", value="Submit">정보 수정</button>

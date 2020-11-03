@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'rest_auth',  # 추가해준다.
     'member.apps.MemberConfig',  # 앱 추가
-    'photo.apps.PhotoConfig'
+    'photo.apps.PhotoConfig',
+    'bootstrap4'
 ]
 
 MIDDLEWARE = [

@@ -236,13 +236,13 @@ class ProfileForm(forms.ModelForm):
     #     )
     # )
     # email = forms.EmailField(
-        # label=_('Email'),
+    #     label=_('Email'),
     #     widget=forms.EmailInput(
     #         attrs={
     #             'class': 'form-control',
     #             'placeholder': _('Change Email address'),
     #             # 'required': 'False',
-    #             # 'blank': 'False',
+    #             # 'blank': 'True',
     #         }
     #     )
     # )

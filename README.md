@@ -17,7 +17,7 @@ Cloning Instagram with Python(Django==3.1.2)
 - six==1.15.0
 - South==1.0.2
 - sqlparse==0.4.1
-
+- django-bootstrap4
 
 
 ## Pages:
