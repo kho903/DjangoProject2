@@ -1,6 +1,7 @@
 import json
 
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.serializers.json import DjangoJSONEncoder
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
@@ -13,7 +14,8 @@ from django.views.generic import CreateView, UpdateView, DeleteView, FormView, D
 from .models import Photo, Comment
 
 
-class PhotoCreate(CreateView):
+class PhotoCreate(LoginRequiredMixin, CreateView):
+    login_url = '/member/login/'
     model = Photo
     fields = ['text', 'img']
     template_name_suffix = '_create'
@@ -44,7 +46,7 @@ class PhotoDelete(DeleteView):
     success_url = '/photo'
 
 
-class PhotoSearchView(FormView):
+class PhotoSearchView(LoginRequiredMixin, FormView):
     form_class = PostSearchForm
     template_name = 'photo/photo_search.html'
 
