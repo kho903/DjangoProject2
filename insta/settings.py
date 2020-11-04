@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'photo.apps.PhotoConfig',
     'bootstrap4',
     'taggit.apps.TaggitAppConfig',
-    'taggit_templatetags2'
+    'taggit_templatetags2',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -153,3 +154,5 @@ AUTH_USER_MODEL = 'member.User'
 
 TAGGIT_CASE_INSENSITIVE = True
 TAGGIT_LIMIT = 50
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
