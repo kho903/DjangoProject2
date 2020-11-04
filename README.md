@@ -2,7 +2,7 @@
 
 Cloning Instagram with Python(Django==3.1.2)
 
-#Rquirements
+## Requirements
 - asgiref==3.2.10
 - Django==3.1.2
 - django-hashers-passlib==0.4
@@ -28,9 +28,10 @@ Cloning Instagram with Python(Django==3.1.2)
 - [x] Logout
 - [x] Delete
 - [x] Change Password
-- [x] User Detail
+- [x] User Detail : my photo (본인 게시물) 추가하기
 - [x] Edit Profile 
-- [x] Follow 
+- [x] Follow : follower feed 추가하기
+  
 
 url
 

@@ -42,9 +42,6 @@ INSTALLED_APPS = [
     'rest_auth',  # 추가해준다.
     'member.apps.MemberConfig',  # 앱 추가
     'photo.apps.PhotoConfig',
-    'bootstrap4'
-    'taggit.apps.TaggitAppConfig',
-    'taggit_templatetags2',
     'bootstrap4',
     'taggit.apps.TaggitAppConfig',
     'taggit_templatetags2'
