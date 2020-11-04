@@ -7,12 +7,15 @@
         <input type="submit" value="Submit" class="btn btn-primary btn-sm">
     </form>
     <br><br>
-    
+
     {% if object_list %}
         {% for object in object_list %}
 
             <div class="card">
                 <div class="card-header">
+                    <a href="{% url 'people' object.user %}">
+                        <p class="card-text">{{ object.user }}</p>
+                    </a>
                 </div>
                 <img src="..{{ object.img.url }}" class="card-img-top" alt="...">
 
@@ -23,9 +26,9 @@
                     <li class="list-group-item">올린 날짜 : {{ object.created }}</li>
                 </ul>
             </div>
-
-            {% endfor %}
+            <br><br><br>
+        {% endfor %}
     {% elif search_term %}
         <b><i>Search Word ({{ search_term }}) Not Found</i></b>
-    {% endif %} 
+    {% endif %}
 {% endblock %}

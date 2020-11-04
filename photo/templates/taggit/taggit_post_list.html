@@ -1,9 +1,9 @@
 {% extends 'home/base.html' %}
 
-{% block title %}taggit_post_list.html{% endblock %}
+{% block title %}태그 검색결과{% endblock %}
 
 {% block content %}
-    <h1>Posts for tag - {{ tagname }}</h1>
+    <h1>Photo(s) for tag - {{ tagname }}</h1>
     <br/>
 
     {% for object in photo_list %}

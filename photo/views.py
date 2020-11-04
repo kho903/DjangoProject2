@@ -6,6 +6,8 @@ from django.core.serializers.json import DjangoJSONEncoder
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
 from django.db.models import Q
+from django.urls import reverse
+
 from .forms import PostSearchForm
 
 from django.views.generic.list import ListView
@@ -133,6 +135,11 @@ def Like(request, pk):
         message = "좋아요"
     context = {'like_count': photo.like.count(), "message": message}
     return HttpResponse(json.dumps(context), content_type='application/json')
+
+
+class TagSearchView(LoginRequiredMixin, FormView):
+    form_class = PostSearchForm
+    template_name = 'taggit/taggit_search.html'
 
 
 class TagPhotoView(ListView):
