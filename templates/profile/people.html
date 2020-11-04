@@ -38,7 +38,7 @@
                <h6>
                    <table width="400" height="100">
                        <tr>
-                           <td> <strong> 게시물 </strong></td>
+                           <td> <strong> 게시물 </strong>{{ people.photo_cnt }}</td>
                            <td> <strong> 팔로워 </strong> {{ people.followers.count }}</td>
                            <td> <strong> 팔로잉 </strong> {{ people.followings.count }}</td>
                        </tr>
@@ -47,6 +47,16 @@
                        {{ people.bio }}
                    </div>
                 </h6>
+            </div>
+            <div class="col-5">
+                {% for object in object_list %}
+                    <div class="card">
+                        <a href="{% url 'photo:detail' object.id %}" class="card-link">
+                            <img src="{{ object.img.url|slice:'1:' }}" class="card-img-top" alt="...">
+                        </a>
+                    </div>
+                    <br><br><br>
+                {% endfor %}
             </div>
         </div>
     </div>

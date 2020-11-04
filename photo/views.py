@@ -3,7 +3,7 @@ import json
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.serializers.json import DjangoJSONEncoder
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
 from django.db.models import Q
 from .forms import PostSearchForm
@@ -22,7 +22,11 @@ class PhotoCreate(LoginRequiredMixin, CreateView):
     success_url = '/photo'
 
     def form_valid(self, form):
-        form.instance.user = self.request.user
+        # 유저의 게시물 갯수 카운팅 하기
+        user = self.request.user
+        user.photo_cnt= user.photo_cnt +1
+        user.save()
+        form.instance.user = user
         form.instance.save()
         return redirect('/photo')
 
@@ -44,6 +48,18 @@ class PhotoDelete(DeleteView):
     model = Photo
     template_name_suffix = '_delete'
     success_url = '/photo'
+
+    def delete(self, request, *args, **kwargs):
+        # delete 할 때 카운트 -1 해주기
+        user = self.request.user
+        user.photo_cnt = user.photo_cnt - 1
+        user.save()
+
+        self.object = self.get_object()
+        success_url = self.get_success_url()
+        self.object.delete()
+
+        return HttpResponseRedirect(success_url)
 
 
 class PhotoSearchView(LoginRequiredMixin, FormView):

@@ -8,6 +8,9 @@ from rest_framework.generics import get_object_or_404
 
 from .forms import UserCreationForm, ProfileForm
 from .models import User
+# from ..photo.models import Photo
+# import sys
+# sys.path.append("..")
 
 def change_password(request):
     if request.method == "POST":
@@ -136,7 +139,13 @@ class UserList(ListView):
 # 게시물의 작성자의 username을 통해 user 페이지에 접근하기
 def peoplePage(request,username):
     person = get_object_or_404(User, username=username)
-    return render(request, "profile/people.html",{'people': person})
+    # 작성자가 username인 photo를 전달하기
+    # photo_list = Photo.objects.filter(username=username).distinct()
+    context={}
+    context['people']=person
+    # context['object_list']=photo_list
+
+    return render(request, "profile/people.html",context)
 
 
 def follow(request, username):

@@ -41,8 +41,11 @@ http://127.0.0.1:8000/member/login/
 
 http://127.0.0.1:8000/member/logout/
 
+http://127.0.0.1:8000/member/profile_update/
+
 http://127.0.0.1:8000/member/change_password/
 
+http://127.0.0.1:8000/member/people/<str:username>/
 
 ### photo
 - [x] Create

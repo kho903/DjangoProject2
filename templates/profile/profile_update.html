@@ -5,7 +5,7 @@
 	<div class="container-fluid">
 		<div>
         <h1>Profile Update</h1>
-            <p> If the formation is not correct, it won't be saved! </p>
+            <p> If the formation is not correct, it won't be saved! (birthday=YYYY-MM-DD)</p>
         <form method='POST' enctype="multipart/form-data">
             {% csrf_token %}
             {% bootstrap_form profile_form %}
