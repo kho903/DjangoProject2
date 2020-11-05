@@ -64,7 +64,6 @@
                         {% firstof user.get_short_name user.get_username %}&ensp;
                     </a>
                     <div class="dropdown-menu">
-<!--                        <a class="dropdown-item" href="{% url 'profile' %}">My Profile</a>-->
                         <a class="dropdown-item" href="{% url 'people' user.username %}">
                             <img src="/static/image/icon/035-user.png" width="25" height="25">
                             profile</a>

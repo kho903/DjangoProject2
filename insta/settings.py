@@ -156,3 +156,5 @@ TAGGIT_CASE_INSENSITIVE = True
 TAGGIT_LIMIT = 50
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+# PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
