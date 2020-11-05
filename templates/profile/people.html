@@ -48,17 +48,22 @@
                    </div>
                 </h6>
             </div>
-            <div class="col-5">
-                {% for object in object_list %}
-                    <div class="card">
-                        <a href="{% url 'photo:detail' object.id %}" class="card-link">
-                            <img src="{{ object.img.url|slice:'1:' }}" class="card-img-top" alt="...">
-                        </a>
-                    </div>
-                    <br><br><br>
-                {% endfor %}
-            </div>
         </div>
+    </div>
+
+    <div class="col-5">
+        {% if object_list %}
+        {% for object in object_list %}
+        <div class="card">
+            <a href="{% url 'photo:detail' object.id %}" class="card-link">
+                <img src="{{ object.img.url }}" class="card-img-top" alt="...">
+            </a>
+        </div>
+        <br><br><br>
+        {% endfor %}
+        {% else %}
+        Nothing uploaded Yet.
+        {% endif %}
     </div>
 </div>
 <style>

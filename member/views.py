@@ -1,5 +1,8 @@
 import os
 import sys
+
+from django.db.models import Q
+
 sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
 # sys.path.append("C:\PycharmProjects\DjangoProject\insta\photo")
 # import photo
@@ -15,9 +18,6 @@ from rest_framework.generics import get_object_or_404
 
 from .forms import UserCreationForm, ProfileForm
 from .models import User
-
-# import sys
-# sys.path.append("..")
 
 
 
@@ -112,10 +112,10 @@ class UserList(ListView):
 def peoplePage(request,username):
     person = get_object_or_404(User, username=username)
     # 작성자가 username인 photo를 전달하기
-    photo_list = Photo.objects.filter(user=username).distinct()
+    photo_list = Photo.objects.filter(Q(user=person))
     context={}
     context['people']=person
-    context['object_list']=photo_list
+    context['object_list']= photo_list
 
     return render(request, "profile/people.html",context)
 
