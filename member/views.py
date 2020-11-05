@@ -1,3 +1,8 @@
+import os
+import sys
+sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
+
+
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.shortcuts import render, redirect
@@ -11,6 +16,8 @@ from .models import User
 # from ..photo.models import Photo
 # import sys
 # sys.path.append("..")
+
+
 
 def change_password(request):
     if request.method == "POST":
@@ -75,44 +82,7 @@ def sign_in(request):
         # 로그인 폼 생성
         form = AuthenticationForm()
         return render(request, 'registration/login.html', {'form': form})
-
-# User profile (프로필 편집 기능)
-def profile(request):
-    if request.method == 'GET':
-        # form = ImageUploadForm(request.POST, request.FILES)
-        return render(request, 'registration/mypage.html') #{'form': form }
-
-    elif request.method == 'POST':
-        user = request.user
-        # 이미지 저장하기
-        # form = ImageUploadForm(request.POST, request.FILES)
-        # if form.is_valid():
-        #     user.photo = form.cleaned_data['image']
-        #     user.save()
-
-        text = request.POST.get('text')
-        email = request.POST.get('email')
-        birth_date = request.POST.get('birth_date')
-        photo = request.POST.get('photo')
-        phone_number = request.POST.get('phone_number')
-        website = request.POST.get('website')
-
-        user.bio = text
-        user.email = email
-        user.phone_number = phone_number
-        user.website = website
-
-        # 값이 존재할 때만 넣어줌으로써, Validation Error 해결 !
-        if birth_date :
-            user.date_of_birth = birth_date
-        if photo :
-            user.photo = photo
-
-        user.save()
-
-        return redirect('member/profile', user)
-
-
+# profile update
 def profile_update(request):
     user = request.user
     if request.method == 'POST':
@@ -140,10 +110,10 @@ class UserList(ListView):
 def peoplePage(request,username):
     person = get_object_or_404(User, username=username)
     # 작성자가 username인 photo를 전달하기
-    # photo_list = Photo.objects.filter(username=username).distinct()
+    photo_list = Photo.objects.filter(username=username).distinct()
     context={}
     context['people']=person
-    # context['object_list']=photo_list
+    context['object_list']=photo_list
 
     return render(request, "profile/people.html",context)
 
@@ -158,29 +128,3 @@ def follow(request, username):
         people.followers.add(request.user)
     return render(request, "profile/people.html",{'people': people})
 
-# class Following():
-#
-#     def get(self, request, *args, pk):
-#         if not request.user.is_authenticated:
-#             return redirect('login/')
-#         else:
-#             user = request.user
-#             opponent = User.objects.get(pk=pk)
-#             if user != opponent:
-#                 if not Follow.objects.filter(who=user):
-#                     Follow.objects.create(who=user)
-#                 if not Follow.objects.filter(who=opponent):
-#                     Follow.objects.create(who=user)
-#                 I =  Follow.objects.get(who=user.id)
-#                 You = Follow.objects.get(who=opponent.id)
-#
-#                 if str(opponent.id) not in I.following.split():
-#                     pass
-#
-#
-#
-# def Unfollow():
-#     return None
-# def peoplePage2(request, pk):
-#     people = get_object_or_404(get_user_model(), id=pk)
-#     return render(request, "profile/people.html",{'people': people})

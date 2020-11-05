@@ -12,7 +12,6 @@ urlpatterns = [
     url('logout/', views.sign_out, name='logout'),
     url('delete/',views.delete, name='delete'),
     url('change_password/',views.change_password,name='change_password'),
-    url('profile/',views.profile, name='profile'),
     url('profile_update/',views.profile_update, name='profile_update'),
     url('user_list/',views.UserList, name='UserList'), # <str:username>/
     # path('<str:username>/followers/', views.followlist, name='followers'),
