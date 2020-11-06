@@ -28,9 +28,9 @@ Cloning Instagram with Python(Django==3.1.2)
 - [x] Logout
 - [x] Delete
 - [x] Change Password
-- [x] User Detail : my photo (본인 게시물) 추가하기
+- [x] User Detail
 - [x] Edit Profile 
-- [x] Follow : follower feed 추가하기
+- [x] Follow
   
 
 url
@@ -53,11 +53,11 @@ http://127.0.0.1:8000/member/people/<str:username>/
 - [x] Update
 - [x] Delete
 - [x] DetailView
-- [x] Comments - ajax 활용하여 새로고침X로 댓글 구현(코드 리팩토링 필요), 순서로직 부정확
-- [x] Search - 아직 텍스트의 search만
+- [x] Comments
+- [x] Search
 - [x] User 
-- [ ] Hashtag
-- [x] Likes - comments와 같은 방법으로 구현 (코드 리팩토링 필요)
+- [x] Hashtag
+- [x] Likes
 
 url
 
