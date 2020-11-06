@@ -30,14 +30,6 @@ class User(AbstractUser):
 #     follower = models.CharField(default='0', max_length=5000)
 
 
-
-
-
-
-
-
-
-
 # class Member(models.Model):
 #     # id, password, 닉네임, 이메일, 전화번호, 설명
 #     # id, pw, nickname, email, phone_number, desc

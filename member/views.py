@@ -20,7 +20,6 @@ from .forms import UserCreationForm, ProfileForm
 from .models import User
 
 
-
 def change_password(request):
     if request.method == "POST":
         form = PasswordChangeForm(request.user, request.POST)
@@ -39,9 +38,10 @@ def change_password(request):
 @login_required
 def delete(request):
     if request.method == "POST":
-        request.User.delete()
+        request.user.delete()
         return redirect('index')
-    return redirect('index')
+    else:
+        return render(request, 'registration/delete.html')
 
 
 # New User Registration(회원가입 기능)
