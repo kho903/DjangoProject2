@@ -31,6 +31,8 @@ Cloning Instagram with Python(Django==3.1.2)
 - [x] User Detail
 - [x] Edit Profile 
 - [x] Follow
+- [x] User's photo
+- [x] User's photo count
   
 
 url
@@ -45,7 +47,7 @@ http://127.0.0.1:8000/member/profile_update/
 
 http://127.0.0.1:8000/member/change_password/
 
-http://127.0.0.1:8000/member/people/<str:username>/
+http://127.0.0.1:8000/member/people/<사용자 이름>
 
 ### photo
 - [x] Create
