@@ -137,10 +137,6 @@ def Like(request, pk):
     return HttpResponse(json.dumps(context), content_type='application/json')
 
 
-class TagSearchView(LoginRequiredMixin, FormView):
-    form_class = PostSearchForm
-    template_name = 'taggit/taggit_search.html'
-
 
 class TagPhotoView(ListView):
     template_name = 'taggit/taggit_post_list.html'

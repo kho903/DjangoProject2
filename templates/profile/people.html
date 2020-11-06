@@ -51,17 +51,16 @@
         </div>
     </div>
     <hr>
-    <div class="galleray">
+    <div class="galleray row">
         {% if object_list %}
         {% for object in object_list %}
-         <div class="gallery-item" tabindex=0 >
+         <div class="gallery-item col-xl-4" tabindex=0 >
 <!--            <div class="card">  class="card-link card-img-top" -->
-            <a href="{% url 'photo:detail' object.id %}">
-                <img src="{{ object.img.url }}"  alt="..." class="gallery-image">
+            <a href="{% url 'photo:detail' object.id %}" >
+                <img src="{{ object.img.url }}"  alt="..." class="gallery-image" style="height: 350px;">
             </a>
          </div>
         {% endfor %}
-        </div>
         {% else %}
         Nothing uploaded Yet.
         {% endif %}
@@ -82,8 +81,8 @@
             text-decoration: none;
         }
         .left{
-            float: left,
-            padding : 10px
+            float: left
+            padding : 10px;
 
         }
     .gallery {
@@ -99,7 +98,7 @@
     .gallery-item {
         position: relative;
         flex: 1 0 22rem;
-        margin: 1rem;
+        margin: 20px auto;
         color: #fff;
         cursor: pointer;
         width : 400px;
