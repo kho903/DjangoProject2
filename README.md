@@ -49,7 +49,7 @@ http://127.0.0.1:8000/member/people/<str:username>/
 
 ### photo
 - [x] Create
-- [x] Read - 해결
+- [x] Read
 - [x] Update
 - [x] Delete
 - [x] DetailView
