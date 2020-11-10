@@ -47,6 +47,9 @@ http://127.0.0.1:8000/member/people/<사용자 이름>
 - [x] Hashtag
 - [x] Likes
 
+<img src="https://user-images.githubusercontent.com/33727516/98672571-5a7c5c00-2399-11eb-9645-88a524d4862e.JPG" width=800></img>
+<img src="https://user-images.githubusercontent.com/33727516/98672575-5b14f280-2399-11eb-9989-ac129ec89734.JPG" width=800></img>
+
 url
 
 http://127.0.0.1:8000/photo/
